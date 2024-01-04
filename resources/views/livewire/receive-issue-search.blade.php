@@ -23,6 +23,7 @@
                 <th>PRODUCT NAME</th>
                 <th>QUANTITY</th>
                 <th>MOVEMENT</th>
+                <th>ACTION</th>
               </tr>
             </thead>
             <tbody>
@@ -40,7 +41,9 @@
                       <label class="badge badge-primary">ISSUED</label>
                     @endif
                   </td>
-                  <td></td>
+                  <td>
+                    <a class="btn btn-success btn-fw" id="icon_edit" href="/receiveissue{{$receiveissue->id}}"><i class="bi bi-eye-fill"></i></a>
+                  </td>
                 </tr>
                 @empty
                 <tr>

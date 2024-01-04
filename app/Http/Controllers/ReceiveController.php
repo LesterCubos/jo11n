@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 use Carbon\Carbon;
 // We will use Form Request to validate incoming requests from our store and update method
 use App\Http\Requests\ReceiveIssue\StoreRequest;
@@ -149,11 +150,9 @@ class ReceiveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): Response
+    public function show(ReceiveIssue $id): View
     {
-        return response()->view('admin.receive_issue.show', [
-            'receive' => ReceiveIssue::findOrFail($id),
-        ]);
+        return view('admin.receive_issue.rishow', ['ri' => $id]);
     }
 
     /**
@@ -161,8 +160,8 @@ class ReceiveController extends Controller
      */
     public function edit(string $id): Response
     {
-        return response()->view('admin.receive_issue.rform', [
-            'receive' => ReceiveIssue::findOrFail($id)
+        return response()->view('admin.expiry.form', [
+            'receive' => ReceiveIssue::findOrFail($id), 'currentDate' => Carbon::now()->format('Y-m-d'),
         ]);
     }
 

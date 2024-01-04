@@ -1,7 +1,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card" style="border-radius: 10px">
       <div class="card-body">
-        <h4 class="card-title">products Table</h4>
+        <h4 class="card-title">Products Table</h4>
         <!-- Button trigger modal -->
         <button id="icon_add" type="button" class="btn btn-success btn-icon-text" data-toggle="modal" data-target="#confirm-product-add">
             <i class="bi bi-bag-check-fill btn-icon-prepend"></i>Add New product

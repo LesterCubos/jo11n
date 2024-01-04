@@ -36,24 +36,12 @@
                 
                 <div class="flex text-center" style="padding-top: 10px">
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="{{ route('receives.index')}}" class="btn btn-warning">Cancel</a>
+                    <a href="{{ route('receives.index') }}" class="btn btn-warning">Cancel</a>
                 </div>
               </form>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    // create onchange event listener for featured_poster input
-    document.getElementById('receive_image').onchange = function(evt) {
-        const [file] = this.files
-        if (file) {
-            // if there is an poster, create a preview in featured_poster_preview
-            document.getElementById('receive_image_preview').src = URL.createObjectURL(file)
-        }
-    }
-  
-</script>
 
 @endsection

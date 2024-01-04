@@ -36,7 +36,11 @@
 
     <div class="row">
         <div class="col-md-12 text-center" style="margin-bottom: 10px">
-          <h5 style="color: #000; font-weight: bold">RECEIVE STOCK</h5>
+            @if ($route == 'RECEIVE')
+                <h5 style="color: #000; font-weight: bold">RECEIVE STOCK</h5>
+            @else
+                <h5 style="color: #000; font-weight: bold">ISSUE STOCK</h5>
+            @endif
         </div>
         <div class="col-md-12">
           <div class="form-group row">
@@ -258,7 +262,7 @@
               @enderror
             
             </div>
-          </div>
-      </div>
+        </div>
+    </div>
 
 </div>
