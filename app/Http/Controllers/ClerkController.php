@@ -10,4 +10,9 @@ class ClerkController extends Controller
     {
         return view("clerk.dashboard");
     }
+    public function Stocks()
+    {
+        return view('clerk.stocks.index');
+    }
+
 }

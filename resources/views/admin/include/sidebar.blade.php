@@ -1,6 +1,6 @@
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-  @if (\Route::current()->getName() == 'profile.edit')
+  @if (\Route::current()->getName() == 'admin.profile.edit')
     <div style="margin-top: 100px"></div>
   @else
     <div class="user-profile">

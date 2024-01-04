@@ -13,7 +13,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('admin.profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('clerk.profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
@@ -21,16 +21,6 @@
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
-
-        <div>
-            <x-input-label for="role" :value="__('Role')" />
-            <x-text-input id="role" name="role" type="text" class="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" :value="old('student_role', $user->role)" required autofocus autocomplete="roal" readonly/>
-        </div>
-
-        <div>
-            <x-input-label for="department" :value="__('Department')" />
-            <x-text-input id="department" name="department" type="text" class="mt-1 block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" :value="old('student_role', $user->department)" required autofocus autocomplete="roal" readonly/>
         </div>
 
         <div>
@@ -55,12 +45,6 @@
                     @endif
                 </div>
             @endif
-        </div>
-
-        <div>
-            <x-input-label for="contact_number" :value="__('Contact Number')" />
-            <x-text-input id="contact_number" name="contact_number" type="text" class="mt-1 block w-full" :value="old('contact_number', $user->contact_number)" required autofocus autocomplete="contact_number" />
-            <x-input-error class="mt-2" :messages="$errors->get('contact_number')" />
         </div>
 
         <div class="flex items-center gap-4">

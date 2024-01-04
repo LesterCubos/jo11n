@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\RecentActivity;
 
 class AdminController extends Controller
 {
     public function AdminDashboard()
     {
-        return view('admin.dashboard');
+        $activities = RecentActivity::latest()->take(5)->get();
+        return view('admin.dashboard', compact('activities'));
     }
 
     public function Stocks()

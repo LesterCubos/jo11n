@@ -28,7 +28,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                 <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
-                <a class="dropdown-item preview-item" href="{{ route('profile.edit') }}">
+                <a class="dropdown-item preview-item" href="{{ route('admin.profile.edit') }}">
                   <i class="icon-head" style="color: #000080; font-weight: 700"></i> Profile
                 </a>
                 <form method="POST" action="{{ route('logout') }}">

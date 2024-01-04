@@ -137,10 +137,10 @@
             </div>
           </div>
           <div class="flex text-center" style="padding-top: 10px">
-            <a href="" class="btn btn-warning btn-icon-text" style="margin-right: 50px: color: #fff">
+            <a class="btn btn-warning btn-icon-text" style="margin-right: 50px: color: #fff" href="{{ route('receives.create') }}">
               <i class="bi bi-arrow-down-circle-fill btn-icon-prepend" style="font-size: 18px"></i>Recieve Stock
             </a>
-            <a href="" class="btn btn-primary btn-icon-text">
+            <a class="btn btn-primary btn-icon-text" href="{{ route('issues.create') }}">
               <i class="bi bi-arrow-up-circle-fill btn-icon-prepend" style="font-size: 18px"></i>Issue Stock
             </a>
         </div>
@@ -178,38 +178,45 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="text-dark">
-                  <div class="d-flex pb-3 border-bottom justify-content-between">
-                    <div class="mr-3"><i class="ri-inbox-archive-line icon-md" style="color:#f8b500"></i></div>
-                    <div class="font-weight-bold mr-sm-4">
-                      <div>Stock In</div>
-                      <div class="text-muted font-weight-normal mt-1">32 Minutes Ago</div>
-                    </div>
-                    <div><h6 class="font-weight-bold text-info ml-sm-2">$325</h6></div>
-                  </div>
-                  <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
-                    <div class="mr-3"><i class="ri-shopping-cart-2-line icon-md" style="color: #37b246"></i></div>
-                    <div class="font-weight-bold mr-sm-4">
-                      <div>Add New Item</div>
-                      <div class="text-muted font-weight-normal mt-1">45 Minutes Ago</div>
-                    </div>
-                    <div><h6 class="font-weight-bold text-info ml-sm-2">$4987</h6></div>
-                  </div>
-                  <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
-                    <div class="mr-3"><i class="ri-inbox-unarchive-line icon-md" style="color: #4d4dff"></i></div>
-                    <div class="font-weight-bold mr-sm-4">
-                      <div>Deposit has updated to Paid                              </div>
-                      <div class="text-muted font-weight-normal mt-1">1 Days Ago</div>
-                    </div>
-                    <div><h6 class="font-weight-bold text-info ml-sm-2">$5391</h6></div>
-                  </div>
-                  <div class="d-flex pt-3 justify-content-between">
-                    <div class="mr-3"><i class="ri-shopping-cart-2-line icon-md" style="color: #37b246"></i></div>
-                    <div class="font-weight-bold mr-sm-4">
-                      <div>Add New Item</div>
-                      <div class="text-muted font-weight-normal mt-1">3 weeks Ago</div>
-                    </div>
-                    <div><h6 class="font-weight-bold text-info ml-sm-2">$264</h6></div>
-                  </div>
+                  @foreach ($activities as $activity)
+                      @if ($activity->activity == 'CREATE')
+                        <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
+                          <div class="mr-3"><i class="ri-shopping-cart-2-fill icon-md" style="color: #37b246"></i></div>
+                          <div class="font-weight-bold mr-sm-4">
+                            <div>Add New Product</div>
+                            <div class="text-muted font-weight-normal mt-1">45 Minutes Ago</div>
+                          </div>
+                          <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
+                        </div>
+                      @elseif ($activity->activity == 'STOCK IN')
+                        <div class="d-flex pb-3 border-bottom justify-content-between">
+                          <div class="mr-3"><i class="ri-inbox-archive-fill icon-md" style="color:#f8b500"></i></div>
+                          <div class="font-weight-bold mr-sm-4">
+                            <div>Stock In</div>
+                            <div class="text-muted font-weight-normal mt-1">32 Minutes Ago</div>
+                          </div>
+                          <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
+                        </div>
+                      @elseif ($activity->activity == 'STOCK OUT')
+                        <div class="d-flex pb-3 border-bottom justify-content-between">
+                          <div class="mr-3"><i class="ri-inbox-unarchive-fill icon-md" style="color:#4d4dff"></i></div>
+                          <div class="font-weight-bold mr-sm-4">
+                            <div>Stock Out</div>
+                            <div class="text-muted font-weight-normal mt-1">32 Minutes Ago</div>
+                          </div>
+                          <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
+                        </div>
+                      @elseif ($activity->activity == 'REMOVE STOCK')
+                      <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
+                        <div class="mr-3"><i class="ri-delete-bin-2-fill icon-md" style="color: #913831"></i></div>
+                        <div class="font-weight-bold mr-sm-4">
+                          <div>Remove Stock</div>
+                          <div class="text-muted font-weight-normal mt-1">1 Days Ago</div>
+                        </div>
+                        <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
+                      </div>
+                      @endif
+                  @endforeach
                 </div>
               </div>
             </div>

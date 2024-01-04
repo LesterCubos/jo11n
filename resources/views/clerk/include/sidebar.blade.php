@@ -1,6 +1,6 @@
 <!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
-  @if (\Route::current()->getName() == 'profile.edit')
+  @if (\Route::current()->getName() == 'clerk.profile.edit')
     <div style="margin-top: 100px"></div>
   @else
     <div class="user-profile">
@@ -29,7 +29,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{ route('clerk.stocks') }}">
         <i class="bi bi-box-seam menu-icon"></i>
         <span class="menu-title">Stocks</span>
       </a>

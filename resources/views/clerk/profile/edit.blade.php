@@ -1,14 +1,14 @@
-@extends('admin.layouts.app')
+@extends('clerk.layouts.app')
 @section('title','Profile Settings')
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @section('content')
 
-    <div class="content-wrapper" style="background-image: linear-gradient(to right, #b6fbff, #83a4d4);">
+    <div class="content-wrapper" style="background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);">
     <div class="pagetitle">
         <h1>Profile</h1>
         <nav>
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="abreadlink"><i class="mdi mdi-home-outline" style="margin-right: 5px"></i>Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('clerk.dashboard') }}" class="abreadlink"><i class="mdi mdi-home-outline" style="margin-right: 5px"></i>Home</a></li>
             
             <li class="breadcrumb-item active" style="font-weight: 700">Profile</li>
             </ol>
@@ -20,7 +20,7 @@
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <div class="card-body">
-                    <form method="POST" action="{{ route('admin.user.profile.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('clerk.user.profile.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         @if (session('success'))
@@ -63,21 +63,21 @@
                 </div>
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <div class="max-w-full">
-                        @include('admin.profile.partials.update-profile-information-form')
+                        @include('clerk.profile.partials.update-profile-information-form')
                     </div>
                 </div>
 
                 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <div class="max-w-xl">
-                        @include('admin.profile.partials.update-password-form')
+                        @include('clerk.profile.partials.update-password-form')
                     </div>
                 </div>
 
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                {{-- <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                     <div class="max-w-xl">
-                        @include('admin.profile.partials.delete-user-form')
+                        @include('profile.partials.delete-user-form')
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

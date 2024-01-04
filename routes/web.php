@@ -42,10 +42,10 @@ require __DIR__.'/auth.php';
 
 Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/admin/profile', [ProfileController::class, 'store'])->name('user.profile.store');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/admin/profile', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+    Route::post('/admin/profile', [ProfileController::class, 'store'])->name('admin.user.profile.store');
+    Route::patch('/admin/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
+    Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('admin.profile.destroy');
 
     //Manage Users
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.manage_users.index');
@@ -59,6 +59,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
     //Manage Stocks
     Route::get('/admin/stocks', [AdminController::class, 'Stocks'])->name('admin.stocks');
+    Route::get('/stocks{id}', [AdminController::class, 'show'])->name('stocks.show');
     Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('receives', ReceiveController::class);
@@ -75,5 +76,13 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
 Route::middleware(['auth','role:clerk'])->group(function(){
     Route::get('/clerk/dashboard', [ClerkController::class, 'ClerkDashboard'])->name('clerk.dashboard');
+    Route::get('/clerk/profile', [ProfileController::class, 'edit'])->name('clerk.profile.edit');
+    Route::post('/clerk/profile', [ProfileController::class, 'store'])->name('clerk.user.profile.store');
+    Route::patch('/clerk/profile', [ProfileController::class, 'update'])->name('clerk.profile.update');
+    Route::delete('/clerk/profile', [ProfileController::class, 'destroy'])->name('clerk.profile.destroy');
+
+    Route::get('/clerk/stocks', [ClerkController::class, 'Stocks'])->name('clerk.stocks');
+
+
 }); //End Group Clerk Middleware
 
