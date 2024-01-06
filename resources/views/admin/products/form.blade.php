@@ -63,7 +63,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">UPC</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control @error('product_upc') is-invalid @enderror" id="product_upc" name="product_upc" value="{{ $product->product_upc }}">
+                                        <input type="text" class="form-control @error('product_upc') is-invalid @enderror" id="product_upc" name="product_upc" value="{{ $product->product_upc }}" readonly>
                                         @error('product_upc')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

@@ -21,7 +21,7 @@ class ReceiveIssue extends Model
         'selling_cost',
         'expiry_date',
         'notes',
-        'status',
+        'issuesmrn',
     ];
 
     public function generateStockMovementReferenceNo()

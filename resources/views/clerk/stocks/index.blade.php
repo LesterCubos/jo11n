@@ -33,7 +33,7 @@
       <div class="card-body">
         <form class="form-sample text-center">
             <a class="btn btn-danger btn-icon-text" href="{{ route('expiry.index') }}" style="margin-left: 20px; margin-right: 100px"><i class="bi bi-clock-fill btn-icon-prepend" style="font-size: 18px"></i>Expiration Status</a>
-            <a class="btn btn-success btn-icon-text" href="{{ route('products.index') }}" style="margin-left: 20px; margin-right: 100px"><i class="bi bi-bag-fill btn-icon-prepend" style="font-size: 18px"></i>Products</a>
+            <a class="btn btn-success btn-icon-text" href="{{ route('clerk.products') }}" style="margin-left: 20px; margin-right: 100px"><i class="bi bi-bag-fill btn-icon-prepend" style="font-size: 18px"></i>Products</a>
             <a class="btn btn-warning btn-icon-text" href="{{ route('receives.index') }}" style="margin-left: 20px; margin-right: 100px"><i class="ri-arrow-up-down-fill btn-icon-prepend" style="font-size: 18px"></i>Receive/Issues</a>
             <a class="btn btn-dark btn-icon-text" href="{{ route('Stockexport') }}" style="margin-left: 20px; margin-right: 20px"><i class="bx bx-export btn-icon-prepend" style="font-size: 18px"></i>Export</a>
         </form>
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  @livewire('stock-search')
+  @livewire('cstock-search')
 
 </div>
 

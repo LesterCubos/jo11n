@@ -62,9 +62,13 @@ class ProductController extends Controller
        Session::put('product_variant', $request->input('product_variant'));
        Session::put('product_category', $request->input('product_category'));
 
+       $cat = Category::where('product_category', $request->input('product_category'))->first();
+       $pdept = $cat->department;
+
         // insert only requests that already validated in the StoreRequest
         $create = Product::create($validated);
         $create->generateSKU();
+        $create->pdept = $pdept;
         $create->save();
 
         if($create) {
@@ -126,8 +130,11 @@ class ProductController extends Controller
         $update = $products->update($validated);
 
         $products = Product::where('id', $id)->get();
+        $cat = Category::where('product_category', $request->input('product_category'))->first();
+        $pdept = $cat->department;
         foreach ($products as $product) {
             $product->generateSKU();
+            $product->pdept = $pdept;
             $product->save();
         }
 

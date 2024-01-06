@@ -27,38 +27,32 @@
             </thead>
             <tbody>
               @forelse ($expiries as $expiry)
-                @foreach ($removes as $remove)
-                    @if ($remove->rsmrn == $expiry->smrn && $remove->rsku == $expiry->psku && $remove->expdate == $expiry->expiry_date)
-                      <tr style="color: red">
-                        <td>{{ $expiry->smrn }}</td>
-                        <td>{{ $expiry->psku }}</td>
-                        <td>{{ $expiry->pname }}</td>
-                        <td>{{ $expiry->expiry_date }}</td>
-                        <td>{{ $expiry->quantity }}</td>
-                        <td> 
-                          <a class="btn btn-primary btn-fw disabled" id="icon_edit" href="{{ route('receives.edit', $expiry->id) }}"><i class="icon-open"></i></a>
-                        </td>
-                      </tr>
-                    @else
-                      <tr>
-                        <td>{{ $expiry->smrn }}</td>
-                        <td>{{ $expiry->psku }}</td>
-                        <td>{{ $expiry->pname }}</td>
-                        <td>{{ $expiry->expiry_date }}</td>
-                        <td>{{ $expiry->quantity }}</td>
-                        <td> 
-                          <a class="btn btn-primary btn-fw" id="icon_edit" href="{{ route('receives.edit', $expiry->id) }}"><i class="icon-open"></i></a>
-                        </td>
-                      </tr>
-                    @endif
-                @endforeach
-                
-                @empty
                 <tr>
-                    <td colspan="6" style="text-align: center; font-size: 24px">
-                        <div class="py-5" style="">No Expiring Products Found...</div>
-                    </td>  
+                  <td>{{ $expiry->smrn }}</td>
+                  <td>{{ $expiry->psku }}</td>
+                  <td>{{ $expiry->pname }}</td>
+                  <td>{{ $expiry->expiry_date }}</td>
+                  <td>
+                    @if ($expiry->issuequan == NULL)
+                      {{ $expiry->quantity }}
+                    @else
+                      {{ $expiry->issuequan }}
+                    @endif 
+                  </td>
+                  <td> 
+                    @if ($expiry->revstock == 1)
+                      <a class="btn btn-primary btn-fw disabled" id="icon_edit" href="{{ route('receives.edit', $expiry->id) }}"><i class="icon-open"></i></a>
+                    @else
+                      <a class="btn btn-primary btn-fw" id="icon_edit" href="{{ route('receives.edit', $expiry->id) }}"><i class="icon-open"></i></a>
+                    @endif
+                  </td>
                 </tr>
+              @empty
+                  <tr>
+                      <td colspan="6" style="text-align: center; font-size: 24px">
+                          <div class="py-5" style="">No Expiring Products Found...</div>
+                      </td>  
+                  </tr>
               @endforelse
             </tbody>
           </table>

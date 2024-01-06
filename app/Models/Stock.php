@@ -18,5 +18,6 @@ class Stock extends Model
         'total_stock_value',
         'availability',
         'availability_stock',
+        'dept',
     ];
 }

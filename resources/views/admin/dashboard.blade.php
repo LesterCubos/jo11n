@@ -178,45 +178,56 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="text-dark">
-                  @foreach ($activities as $activity)
-                      @if ($activity->activity == 'CREATE')
+                  @if($activities->count() > 0)
+                    @foreach ($activities as $activity)
+                        @if ($activity->activity == 'CREATE')
+                          <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
+                            <div class="mr-3"><i class="ri-shopping-cart-2-fill icon-md" style="color: #37b246"></i></div>
+                            <div class="font-weight-bold mr-sm-4">
+                              <div>Add New Product</div>
+                              <div class="text-muted font-weight-normal mt-1">45 Minutes Ago</div>
+                            </div>
+                            <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
+                          </div>
+                        @elseif ($activity->activity == 'STOCK IN')
+                          <div class="d-flex pb-3 border-bottom justify-content-between">
+                            <div class="mr-3"><i class="ri-inbox-archive-fill icon-md" style="color:#f8b500"></i></div>
+                            <div class="font-weight-bold mr-sm-4">
+                              <div>Stock In</div>
+                              <div class="text-muted font-weight-normal mt-1">32 Minutes Ago</div>
+                            </div>
+                            <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
+                          </div>
+                        @elseif ($activity->activity == 'STOCK OUT')
+                          <div class="d-flex pb-3 border-bottom justify-content-between">
+                            <div class="mr-3"><i class="ri-inbox-unarchive-fill icon-md" style="color:#4d4dff"></i></div>
+                            <div class="font-weight-bold mr-sm-4">
+                              <div>Stock Out</div>
+                              <div class="text-muted font-weight-normal mt-1">32 Minutes Ago</div>
+                            </div>
+                            <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
+                          </div>
+                        @elseif ($activity->activity == 'REMOVE STOCK')
                         <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
-                          <div class="mr-3"><i class="ri-shopping-cart-2-fill icon-md" style="color: #37b246"></i></div>
+                          <div class="mr-3"><i class="ri-delete-bin-2-fill icon-md" style="color: #913831"></i></div>
                           <div class="font-weight-bold mr-sm-4">
-                            <div>Add New Product</div>
-                            <div class="text-muted font-weight-normal mt-1">45 Minutes Ago</div>
+                            <div>Remove Stock</div>
+                            <div class="text-muted font-weight-normal mt-1">1 Days Ago</div>
                           </div>
                           <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
                         </div>
-                      @elseif ($activity->activity == 'STOCK IN')
-                        <div class="d-flex pb-3 border-bottom justify-content-between">
-                          <div class="mr-3"><i class="ri-inbox-archive-fill icon-md" style="color:#f8b500"></i></div>
-                          <div class="font-weight-bold mr-sm-4">
-                            <div>Stock In</div>
-                            <div class="text-muted font-weight-normal mt-1">32 Minutes Ago</div>
-                          </div>
-                          <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
-                        </div>
-                      @elseif ($activity->activity == 'STOCK OUT')
-                        <div class="d-flex pb-3 border-bottom justify-content-between">
-                          <div class="mr-3"><i class="ri-inbox-unarchive-fill icon-md" style="color:#4d4dff"></i></div>
-                          <div class="font-weight-bold mr-sm-4">
-                            <div>Stock Out</div>
-                            <div class="text-muted font-weight-normal mt-1">32 Minutes Ago</div>
-                          </div>
-                          <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
-                        </div>
-                      @elseif ($activity->activity == 'REMOVE STOCK')
-                      <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
-                        <div class="mr-3"><i class="ri-delete-bin-2-fill icon-md" style="color: #913831"></i></div>
-                        <div class="font-weight-bold mr-sm-4">
-                          <div>Remove Stock</div>
-                          <div class="text-muted font-weight-normal mt-1">1 Days Ago</div>
-                        </div>
-                        <div><h6 class="font-weight-bold text-info ml-sm-2">{{ $activity->details }}</h6></div>
+                        @endif
+                    @endforeach
+                  @else
+                    <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
+                      <div class="mr-3"><i class="bi bi-exclamation-square-fill icon-md" style="color: red"></i></div>
+                      <div class="font-weight-bold mr-sm-4">
+                        <div>No Recent Activity</div>
+                        <div class="text-muted font-weight-normal mt-1">NONE</div>
                       </div>
-                      @endif
-                  @endforeach
+                      <div><h6 class="font-weight-bold text-info ml-sm-2">0</h6></div>
+                    </div>
+                  @endif
                 </div>
               </div>
             </div>

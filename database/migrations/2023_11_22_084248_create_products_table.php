@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('product_variant')->nullable();
             $table->string('packaging_type')->nullable();
             $table->string('min_stock');
+            $table->string('pdept')->nullable();
             $table->timestamps();
         });
     }

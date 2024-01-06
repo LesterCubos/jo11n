@@ -73,6 +73,7 @@ class IssueController extends Controller
                     }
                     $stock->availability = $avail;
                     $stock->availability_stock = $stock->availability_stock - $request->input('quantity');
+                    $stock->dept = $request->input('department');
                     $stock->save();
 
                     $notif = 'Issue Stocks created successfully!';
@@ -85,6 +86,10 @@ class IssueController extends Controller
             }
         }
 
+        $reis = ReceiveIssue::where('smrn', $request->input('issuesmrn'))->first();
+        $reis->issuequan = $reis->quantity - $request->input('quantity');
+        $reis->save();
+        
         // insert only requests that already validated in the StoreRequest
         $create = ReceiveIssue::create($validated);
         $create->movement = 'ISSUED';
@@ -98,7 +103,7 @@ class IssueController extends Controller
         
         if($create) {
             // add flash for the success notification
-            session()->flash('notif.danger', $notif);
+            session()->flash('notif.success', $notif);
             return redirect()->route('receives.index');
         }
 

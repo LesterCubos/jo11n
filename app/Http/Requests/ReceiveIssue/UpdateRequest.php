@@ -23,6 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'date' => 'required|date',
+            'issuesmrn' => 'required|string|min:3|max:250',
             'smrn' => 'required|string|min:3|max:250',
             'psku' => 'required|string|min:3|max:250',
             // 'pupc',

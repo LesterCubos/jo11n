@@ -82,7 +82,12 @@ Route::middleware(['auth','role:clerk'])->group(function(){
     Route::delete('/clerk/profile', [ProfileController::class, 'destroy'])->name('clerk.profile.destroy');
 
     Route::get('/clerk/stocks', [ClerkController::class, 'Stocks'])->name('clerk.stocks');
-
+    Route::get('/clerk/stocks{id}', [ClerkController::class, 'show'])->name('clerk.stocks.show');
+    Route::get('/clerk/products', [ClerkController::class, 'Products'])->name('clerk.products');
+    Route::get('/clerk/products{id}', [ClerkController::class, 'proshow'])->name('clerk.products.show');
+    Route::resource('receives', ReceiveController::class);
+    Route::resource('issues', IssueController::class);
+    Route::get('/receiveissue{id}', [ReceiveController::class, 'show'])->name('receiveissue.show');
 
 }); //End Group Clerk Middleware
 

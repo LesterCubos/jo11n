@@ -20,6 +20,7 @@ class Product extends Model
         'product_variant',
         'packaging_type',
         'min_stock',
+        'pdept',
     ];
 
     public function generateSKU()

@@ -18,6 +18,7 @@ use App\Models\ReceiveIssue;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\RecentActivity;
+use Illuminate\Support\Facades\Auth;
 
 class ReceiveController extends Controller
 {
@@ -26,7 +27,14 @@ class ReceiveController extends Controller
      */
     public function index(): Response
     {
-        return response()->view('admin.receive_issue.index', [
+        $user = Auth::user();
+        $role = $user->role;
+        if ($role == 'clerk') {
+            $route = 'clerk.receive_issue.index';
+        } if ($role == 'admin') {
+            $route = 'admin.receive_issue.index';
+        }
+        return response()->view($route, [
             'receives' => ReceiveIssue::orderBy('updated_at', 'desc')->paginate(5)
         ]);
     }
@@ -36,13 +44,20 @@ class ReceiveController extends Controller
      */
     public function create(): Response
     {
+        $user = Auth::user();
+        $role = $user->role;
+        if ($role == 'clerk') {
+            $route = 'clerk.receive_issue.rform';
+        } if ($role == 'admin') {
+            $route = 'admin.receive_issue.rform';
+        }
         $sku = Session::get('sku');
         $product = Product::where('product_sku', $sku)->first();
         $stockMovement = new ReceiveIssue();
         $smrn = $stockMovement->generateStockMovementReferenceNo();
         $currentDate = Carbon::now()->format('Y-m-d');
         Session::put('route', 'RECEIVE');
-        return response()->view('admin.receive_issue.rform', compact('currentDate', 'smrn', 'product'));
+        return response()->view($route, compact('currentDate', 'smrn', 'product'));
     }
 
     /**
@@ -80,6 +95,7 @@ class ReceiveController extends Controller
             $stock->total_stock_value = number_format($request->input('selling_cost') * $request->input('quantity'), 2, '.', '');
             $stock->availability = $avail;
             $stock->availability_stock = $request->input('quantity');
+            $stock->dept = $request->input('department');
             $stock->save();
         } else {
             if (Stock::where('stock_sku', $request->input('psku'))->exists()) {
@@ -102,6 +118,7 @@ class ReceiveController extends Controller
                     }
                     $stock->availability = $avail;
                     $stock->availability_stock = $stock->availability_stock + $request->input('quantity');
+                    $stock->dept = $request->input('department');
                     $stock->save();
 
             } else {
@@ -126,6 +143,7 @@ class ReceiveController extends Controller
                     'total_stock_value' => number_format($request->input('selling_cost') * $request->input('quantity'), 2, '.', ''),
                     'availability' => $avail,
                     'availability_stock' => $request->input('quantity'),
+                    'dept' => $request->input('department'),
                 ]);
                 $createstock->save();
             }
@@ -152,7 +170,14 @@ class ReceiveController extends Controller
      */
     public function show(ReceiveIssue $id): View
     {
-        return view('admin.receive_issue.rishow', ['ri' => $id]);
+        $user = Auth::user();
+        $role = $user->role;
+        if ($role == 'clerk') {
+            $route = 'clerk.receive_issue.rishow';
+        } if ($role == 'admin') {
+            $route = 'admin.receive_issue.rishow';
+        }
+        return view($route, ['ri' => $id]);
     }
 
     /**

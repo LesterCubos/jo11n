@@ -140,7 +140,12 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Quantity</label>
                                     <div class="col-sm-9">
+                                      @if ($receive->issuequan == NULL)
                                         <input type="number" class="form-control @error('rquantity') is-invalid @enderror" id="rquantity" name="rquantity" value="{{ $receive->quantity }}" required readonly>
+                                      @else
+                                        <input type="number" class="form-control @error('rquantity') is-invalid @enderror" id="rquantity" name="rquantity" value="{{ $receive->issuequan }}" required readonly>
+                                      @endif 
+                                        
                                         @error('rquantity')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

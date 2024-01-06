@@ -69,7 +69,7 @@
               <label class="col-sm-3 col-form-label">SKU</label>
               <div class="col-sm-9">
                 <div class="search-box">
-                    <input type="text" class="form-control  @error('psku') is-invalid @enderror" id="psku" name="psku" value="{{ old('psku') }}" required  wire:model="skuSearch" wire:keyup="searchResult" placeholder="Search SKU" >
+                    <input type="text" class="form-control  @error('psku') is-invalid @enderror" id="psku" name="psku" value="{{ old('psku') }}" required  wire:model="cskuSearch" wire:keyup="searchResult" placeholder="Search SKU" >
             
                     <!-- Search result list -->
                     @if($showdiv)

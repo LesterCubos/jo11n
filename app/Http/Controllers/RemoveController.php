@@ -14,6 +14,7 @@ use App\Models\RemmoveStock;
 use App\Models\Stock;
 use App\Models\RecentActivity;
 use App\Models\Product;
+use App\Models\ReceiveIssue;
 
 
 class RemoveController extends Controller
@@ -65,6 +66,7 @@ class RemoveController extends Controller
                     }
                     $stock->availability = $avail;
                     $stock->availability_stock = $stock->availability_stock - $request->input('rquantity');
+                    $stock->dept = $request->input('rdept');
                     $stock->save();
 
                     $notif = 'Expired Stock removed successfully!';
@@ -79,6 +81,10 @@ class RemoveController extends Controller
 
         // insert only requests that already validated in the StoreRequest
         $create = RemmoveStock::create($validated);
+
+        $ri = ReceiveIssue::where('smrn', $request->input('rsmrn'))->first();
+        $ri->revstock = 1;
+        $ri->save();
 
         $act = new RecentActivity();
         $act->actname =  $request->input('rname');

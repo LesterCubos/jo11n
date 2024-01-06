@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('total_stock_value')->nullable();
             $table->string('availability')->nullable();
             $table->string('availability_stock')->nullable();
+            $table->string('dept')->nullable();
             $table->timestamps();
         });
     }

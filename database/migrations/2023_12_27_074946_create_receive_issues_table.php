@@ -27,6 +27,9 @@ return new class extends Migration
             $table->date('expiry_date')->nullable();
             $table->text('notes')->nullable();
             $table->string('movement')->nullable();
+            $table->boolean('revstock')->default(0);
+            $table->string('issuesmrn')->nullable();
+            $table->string('issuequan')->nullable();
             $table->timestamps();
         });
     }
