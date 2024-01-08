@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('clerk.layouts.app')
     @if ($ri->movement == 'RECEIVED')
         @php($title = 'Show Receive Stocks')
     @else
@@ -220,7 +220,7 @@
                     </div>
                 </div>
                 <div class="flex text-center" style="padding-top: 10px">
-                    <a href="{{ route('receives.index') }}" class="btn btn-warning">Back</a>
+                    <a href="{{ route('creceives.index') }}" class="btn btn-warning">Back</a>
                 </div>
               </form>
             </div>

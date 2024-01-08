@@ -9,7 +9,7 @@
                 <i class="icon-search"></i>
               </span>
             </div>
-            <input type="text" class="form-control" placeholder="Search Product SKU..." wire:model.lazy="searchRemove">
+            <input type="text" class="form-control" placeholder="Search Product SKU..." wire:model.lazy="searchCremove">
         </div>
         <div class="table-responsive">
           <table class="table table-hover">
@@ -32,7 +32,7 @@
                   <td>{{ $remove->expdate }}</td>
                   <td>{{ $remove->rquantity }}</td>
                   <td> 
-                    <a class="btn btn-success btn-fw" id="icon_edit" href="/admin/remove{{$remove->id}}"><i class="bi bi-eye-fill"></i></a>
+                    <a class="btn btn-success btn-fw" id="icon_edit" href="/clerk/remove{{$remove->id}}"><i class="bi bi-eye-fill"></i></a>
                   </td>
                 </tr>
                 @empty

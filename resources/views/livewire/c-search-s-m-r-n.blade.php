@@ -36,7 +36,7 @@
 
     <div class="row">
         <div class="col-md-12 text-center" style="margin-bottom: 10px">
-            <h5 style="color: #000; font-weight: bold">RECEIVE STOCK</h5>
+            <h5 style="color: #000; font-weight: bold">ISSUE STOCK</h5>
         </div>
         <div class="col-md-12">
           <div class="form-group row">
@@ -66,10 +66,10 @@
         </div>
         <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-3 col-form-label">SKU</label>
+              <label class="col-sm-3 col-form-label">Issue SMRN</label>
               <div class="col-sm-9">
                 <div class="search-box">
-                    <input type="text" class="form-control  @error('psku') is-invalid @enderror" id="psku" name="psku" value="{{ old('psku') }}" required  wire:model="cskuSearch" wire:keyup="searchResult" placeholder="Search SKU" >
+                    <input type="text" class="form-control  @error('issuesmrn') is-invalid @enderror" id="issuesmrn" name="issuesmrn" value="{{ old('issuesmrn') }}" required  wire:model="smrnCsearch" wire:keyup="searchResult" placeholder="Search SMRN" >
             
                     <!-- Search result list -->
                     @if($showdiv)
@@ -77,11 +77,30 @@
                             @if(!empty($records))
                                 @foreach($records as $record)
             
-                                     <li wire:click="fetchskuDetail({{ $record->id }})">{{ $record->product_sku}}</li>
+                                    <li wire:click="fetchsmrnDetail({{ $record->id }})">{{ $record->smrn}}</li>
             
                                 @endforeach
                             @endif
                         </ul>
+                    @endif
+                </div>
+                  @error('issuesmrn')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+              </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">SKU</label>
+              <div class="col-sm-9">
+                <div class="search-box">
+                    @if(empty($smrnDetails))
+                        <input type="text" class="form-control  @error('psku') is-invalid @enderror" id="psku" name="psku" required readonly>
+                    @else
+                        <input type="text" class="form-control  @error('psku') is-invalid @enderror" id="psku" name="psku" value="{{ $smrnDetails->psku }}" required readonly>
                     @endif
                 </div>
                   @error('psku')
@@ -109,10 +128,10 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Product Name</label>
             <div class="col-sm-9">
-                @if(empty($skuDetails))
+                @if(empty($smrnDetails))
                     <input type="text" class="form-control  @error('pname') is-invalid @enderror" id="pname" name="pname" value="" required readonly>
                 @else
-                    <input type="text" class="form-control  @error('pname') is-invalid @enderror" id="pname" name="pname" value="{{ $skuDetails->product_name }}" required readonly>
+                    <input type="text" class="form-control  @error('pname') is-invalid @enderror" id="pname" name="pname" value="{{ $smrnDetails->pname }}" required readonly>
                 @endif
                 @error('pname')
                 <span class="invalid-feedback" role="alert">
@@ -126,10 +145,10 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Product Category</label>
               <div class="col-sm-9">
-                  @if(empty($skuDetails))
+                  @if(empty($smrnDetails))
                     <input type="text" class="form-control  @error('pcategory') is-invalid @enderror" id="pcategory" name="pcategory" value="" required readonly>
                   @else
-                    <input type="text" class="form-control  @error('pcategory') is-invalid @enderror" id="pcategory" name="pcategory" value="{{ $skuDetails->product_category }}" required readonly>
+                    <input type="text" class="form-control  @error('pcategory') is-invalid @enderror" id="pcategory" name="pcategory" value="{{ $smrnDetails->pcategory }}" required readonly>
                   @endif
                   @error('pcategory')
                   <span class="invalid-feedback" role="alert">
@@ -143,15 +162,10 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Department</label>
               <div class="col-sm-9">
-                  @if(empty($skuDetails))
+                  @if(empty($smrnDetails))
                     <input type="text" class="form-control  @error('department') is-invalid @enderror" id="department" name="department" value="" required readonly>
                   @else
-                    @foreach ($categories as $category)
-                        @if ($category->product_category == $skuDetails->product_category)
-                            @php( $department = $category->department )
-                        @endif
-                    @endforeach
-                      <input type="text" class="form-control  @error('department') is-invalid @enderror" id="department" name="department" value="{{ $department }}" required readonly>
+                      <input type="text" class="form-control  @error('department') is-invalid @enderror" id="department" name="department" value="{{ $smrnDetails->department }}" required readonly>
                   @endif
                   @error('department')
                   <span class="invalid-feedback" role="alert">
@@ -165,15 +179,10 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Supplier</label>
               <div class="col-sm-9">
-                  @if(empty($skuDetails))
+                  @if(empty($smrnDetails))
                     <input type="text" class="form-control  @error('sname') is-invalid @enderror" id="sname" name="sname" value="" required readonly>
                   @else
-                    @foreach ($categories as $category)
-                        @if ($category->product_category == $skuDetails->product_category)
-                            @php( $sname = $category->supplier_name )
-                        @endif
-                    @endforeach
-                      <input type="text" class="form-control  @error('sname') is-invalid @enderror" id="sname" name="sname" value="{{ $sname }}" required readonly>
+                      <input type="text" class="form-control  @error('sname') is-invalid @enderror" id="sname" name="sname" value="{{ $smrnDetails->sname }}" required readonly>
                   @endif
                   @error('sname')
                   <span class="invalid-feedback" role="alert">
@@ -187,7 +196,11 @@
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Purchase Cost</label>
                 <div class="col-sm-9">
-                        <input type="number" class="form-control @error('purchase_cost') is-invalid @enderror" id="purchase_cost" name="purchase_cost" value="{{ old('purchase_cost') }}" step="0.01">
+                    @if(empty($smrnDetails))
+                        <input type="number" class="form-control @error('purchase_cost') is-invalid @enderror" id="purchase_cost" name="purchase_cost" value="" step="0.01" required readonly>
+                    @else
+                        <input type="number" class="form-control @error('purchase_cost') is-invalid @enderror" id="purchase_cost" name="purchase_cost" value="{{ $smrnDetails->purchase_cost }}" step="0.01" required readonly>
+                    @endif
                     @error('purchase_cost')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -200,7 +213,11 @@
             <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Selling Cost</label>
                 <div class="col-sm-9">
-                        <input type="number" class="form-control @error('selling_cost') is-invalid @enderror" id="selling_cost" name="selling_cost" value="{{ old('selling_cost') }}" step="0.01">
+                    @if(empty($smrnDetails))
+                        <input type="number" class="form-control @error('selling_cost') is-invalid @enderror" id="selling_cost" name="selling_cost" value="" step="0.01" required readonly>
+                    @else
+                        <input type="number" class="form-control @error('selling_cost') is-invalid @enderror" id="selling_cost" name="selling_cost" value="{{ $smrnDetails->selling_cost }}" step="0.01" required readonly>
+                    @endif
                     @error('selling_cost')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -226,7 +243,11 @@
             <div class="form-group row">
             <label class="col-sm-3 col-form-label">Expiry Date </label>
                 <div class="col-sm-9">
-                    <input type="date" name="expiry_date" id="expiry_date" class="form-control @error('expiry_date') is-invalid @enderror" value="{{ old('expiry_date') }}">
+                    @if(empty($smrnDetails))
+                        <input type="date" name="expiry_date" id="expiry_date" class="form-control @error('expiry_date') is-invalid @enderror" value="" required readonly>
+                    @else
+                        <input type="date" name="expiry_date" id="expiry_date" class="form-control @error('expiry_date') is-invalid @enderror" value="{{ $smrnDetails->expiry_date }}" required readonly>
+                    @endif
                     @error('expiry_date')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

@@ -29,4 +29,8 @@ class AdminController extends Controller
     {
         return view('admin.expiry.index');
     }
+    public function Orders()
+    {
+        return view('admin.orders.index');
+    }
 }

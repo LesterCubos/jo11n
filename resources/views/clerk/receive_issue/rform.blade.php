@@ -36,7 +36,7 @@
                 
                 <div class="flex text-center" style="padding-top: 10px">
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="{{ route('receives.index') }}" class="btn btn-warning">Cancel</a>
+                    <a href="{{ route('creceives.index') }}" class="btn btn-warning">Cancel</a>
                 </div>
               </form>
             </div>

@@ -1,12 +1,12 @@
-@extends('admin.layouts.app')
+@extends('clerk.layouts.app')
 @section('title','Add Issue Stock')
 @section('content')
 
-<div class="content-wrapper" style="background-image: linear-gradient(to right, #b6fbff, #83a4d4);">
+<div class="content-wrapper" style="background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);">
   <div class="pagename">
     <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="abreadlink"><i class="bi bi-house-fill"></i> Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('clerk.dashboard') }}" class="abreadlink"><i class="bi bi-house-fill"></i> Dashboard</a></li>
         <li class="breadcrumb-item">Manage Issue Stocks</li>
         <li class="breadcrumb-item active">Issue Stocks</li>
     </ol>
@@ -28,7 +28,7 @@
                 <div class="col-12 grid-margin">
                     <div class="card">
                       <div class="card-body">
-                        @livewire('search-s-m-r-n')
+                        @livewire('c-search-s-m-r-n')
                       </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                 
                 <div class="flex text-center" style="padding-top: 10px">
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="{{ route('receives.index') }}" class="btn btn-warning">Cancel</a>
+                    <a href="{{ route('creceives.index') }}" class="btn btn-warning">Cancel</a>
                 </div>
               </form>
             </div>

@@ -73,7 +73,7 @@
             
                     <!-- Search result list -->
                     @if($showdiv)
-                        <ul>
+                        <ul style="z-index: 1000;">
                             @if(!empty($records))
                                 @foreach($records as $record)
             

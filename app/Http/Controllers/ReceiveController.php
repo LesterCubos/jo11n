@@ -185,7 +185,14 @@ class ReceiveController extends Controller
      */
     public function edit(string $id): Response
     {
-        return response()->view('admin.expiry.form', [
+        $user = Auth::user();
+        $role = $user->role;
+        if ($role == 'clerk') {
+            $route = 'clerk.expiry.form';
+        } if ($role == 'admin') {
+            $route = 'admin.expiry.form';
+        }
+        return response()->view($route, [
             'receive' => ReceiveIssue::findOrFail($id), 'currentDate' => Carbon::now()->format('Y-m-d'),
         ]);
     }

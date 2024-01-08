@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ReceiveIssue\RemoveRequest;
 use App\Models\RemmoveStock;
 use App\Models\Stock;
@@ -24,7 +25,14 @@ class RemoveController extends Controller
      */
     public function index(): Response
     {
-        return response()->view('admin.expiry.revindex', [
+        $user = Auth::user();
+        $role = $user->role;
+        if ($role == 'clerk') {
+            $route = 'clerk.expiry.revindex';
+        } if ($role == 'admin') {
+            $route = 'admin.expiry.revindex';
+        }
+        return response()->view($route, [
         ]);
     }
 
@@ -106,7 +114,14 @@ class RemoveController extends Controller
      */
     public function show(RemmoveStock $id): View
     {
-        return view('admin.expiry.revshow', ['remove' => $id]);
+        $user = Auth::user();
+        $role = $user->role;
+        if ($role == 'clerk') {
+            $route = 'clerk.expiry.revshow';
+        } if ($role == 'admin') {
+            $route = 'admin.expiry.revshow';
+        }
+        return view($route, ['remove' => $id]);
     }
 
     /**

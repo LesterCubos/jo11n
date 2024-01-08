@@ -73,11 +73,11 @@
             
                     <!-- Search result list -->
                     @if($showdiv)
-                        <ul>
+                        <ul style="z-index: 1000;">
                             @if(!empty($records))
                                 @foreach($records as $record)
             
-                                     <li wire:click="fetchsmrnDetail({{ $record->id }})">{{ $record->smrn}}</li>
+                                    <li wire:click="fetchsmrnDetail({{ $record->id }})">{{ $record->smrn}}</li>
             
                                 @endforeach
                             @endif

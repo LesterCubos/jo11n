@@ -42,7 +42,7 @@
                     @endif
                   </td>
                   <td>
-                    <a class="btn btn-success btn-fw" id="icon_edit" href="/receiveissue{{$receiveissue->id}}"><i class="bi bi-eye-fill"></i></a>
+                    <a class="btn btn-success btn-fw" id="icon_edit" href="/admin/receiveissue{{$receiveissue->id}}"><i class="bi bi-eye-fill"></i></a>
                   </td>
                 </tr>
                 @empty

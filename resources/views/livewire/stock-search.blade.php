@@ -45,7 +45,7 @@
                   <td>{{ $stock->availability_stock }}</td>
                   <td> 
                     
-                      <a href="/stocks{{$stock->id}}" class="btn btn-info"><i class="icon-eye"></i></a> 
+                      <a href="/admin/stocks{{$stock->id}}" class="btn btn-info"><i class="icon-eye"></i></a> 
   
 
                       {{-- @if ($stock->role == "admin")

@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 // We will use Form Request to validate incoming requests from our store and update method
 use App\Http\Requests\ReceiveIssue\StoreRequest;
 use App\Http\Requests\ReceiveIssue\UpdateRequest;
@@ -34,13 +35,20 @@ class IssueController extends Controller
      */
     public function create(): Response
     {
+        $user = Auth::user();
+        $role = $user->role;
+        if ($role == 'clerk') {
+            $route = 'clerk.receive_issue.iform';
+        } if ($role == 'admin') {
+            $route = 'admin.receive_issue.iform';
+        }
         $sku = Session::get('sku');
         $product = Product::where('product_sku', $sku)->first();
         $stockMovement = new ReceiveIssue();
         $smrn = $stockMovement->generateStockMovementReferenceNo();
         $currentDate = Carbon::now()->format('Y-m-d');
         Session::put('route', 'ISSUE');
-        return response()->view('admin.receive_issue.iform', compact('currentDate', 'smrn', 'product'));
+        return response()->view($route, compact('currentDate', 'smrn', 'product'));
     }
 
     /**

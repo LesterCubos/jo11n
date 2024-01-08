@@ -1,8 +1,8 @@
-@extends('admin.layouts.app')
+@extends('clerk.layouts.app')
 @section('title','Add New Product')
 @section('content')
 
-<div class="content-wrapper" style="background-image: linear-gradient(to right, #b6fbff, #83a4d4);">
+<div class="content-wrapper" style="background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);">
   <div class="pagename">
     <nav>
     <ol class="breadcrumb">

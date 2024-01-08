@@ -29,5 +29,9 @@ class ClerkController extends Controller
     {
         return view('clerk.products.form', ['product' => $id]);
     }
+    public function Expiry()
+    {
+        return view('clerk.expiry.index');
+    }
 
 }

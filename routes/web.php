@@ -55,22 +55,24 @@ Route::middleware(['auth','role:admin'])->group(function(){
                 ->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
     Route::get('/admin/users/userView{user}', [RegisteredUserController::class, 'userView'])->name('admin.manage_users.show');
-    Route::resource('user',RegisteredUserController::class);
+    Route::resource('/admin/user',RegisteredUserController::class);
 
     //Manage Stocks
     Route::get('/admin/stocks', [AdminController::class, 'Stocks'])->name('admin.stocks');
-    Route::get('/stocks{id}', [AdminController::class, 'show'])->name('stocks.show');
-    Route::resource('products', ProductController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('receives', ReceiveController::class);
-    Route::resource('issues', IssueController::class);
-    Route::get('/receiveissue{id}', [ReceiveController::class, 'show'])->name('receiveissue.show');
-    Route::get('Stockexport', [CSVHandlerController::class, 'Stockexport'])->name('Stockexport');
+    Route::get('/admin/stocks{id}', [AdminController::class, 'show'])->name('stocks.show');
+    Route::resource('/admin/products', ProductController::class);
+    Route::resource('/admin/categories', CategoryController::class);
+    Route::resource('/admin/receives', ReceiveController::class);
+    Route::resource('/admin/issues', IssueController::class);
+    Route::get('/admin/receiveissue{id}', [ReceiveController::class, 'show'])->name('receiveissue.show');
+    Route::get('/admin/Stockexport', [CSVHandlerController::class, 'Stockexport'])->name('Stockexport');
     Route::get('/admin/expiry', [AdminController::class, 'Expiry'])->name('expiry.index');
-    Route::resource('removes', RemoveController::class);
-    Route::get('/remove{id}', [RemoveController::class, 'show'])->name('remove.show');
+    Route::resource('/admin/removes', RemoveController::class);
+    Route::get('/admin/remove{id}', [RemoveController::class, 'show'])->name('remove.show');
+    //Orders
+    Route::get('/admin/orders', [AdminController::class, 'Orders'])->name('admin.orders');
     //Manage Suppliers
-    Route::resource('suppliers', SupplierController::class);
+    Route::resource('/admin/suppliers', SupplierController::class);
 
 }); //End Group Admin Middleware
 
@@ -85,9 +87,13 @@ Route::middleware(['auth','role:clerk'])->group(function(){
     Route::get('/clerk/stocks{id}', [ClerkController::class, 'show'])->name('clerk.stocks.show');
     Route::get('/clerk/products', [ClerkController::class, 'Products'])->name('clerk.products');
     Route::get('/clerk/products{id}', [ClerkController::class, 'proshow'])->name('clerk.products.show');
-    Route::resource('receives', ReceiveController::class);
-    Route::resource('issues', IssueController::class);
-    Route::get('/receiveissue{id}', [ReceiveController::class, 'show'])->name('receiveissue.show');
+    Route::resource('/clerk/creceives', ReceiveController::class);
+    Route::resource('/clerk/cissues', IssueController::class);
+    Route::get('/clerk/receiveissue{id}', [ReceiveController::class, 'show'])->name('creceiveissue.show');
+    Route::get('/clerk/Stockexport', [CSVHandlerController::class, 'CStockexport'])->name('CStockexport');
+    Route::get('/clerk/expiry', [ClerkController::class, 'Expiry'])->name('clerk.expiry.index');
+    Route::resource('/clerk/cremoves', RemoveController::class);
+    Route::get('/clerk/remove{id}', [RemoveController::class, 'show'])->name('clerk.remove.show');
 
 }); //End Group Clerk Middleware
 
