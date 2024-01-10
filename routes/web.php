@@ -15,6 +15,8 @@ use App\Http\Controllers\ReceiveController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\RemoveController;
 use App\Http\Controllers\CSVHandlerController;
+// Order
+use App\Http\Controllers\OrderController;
 // Manage Supplier
 use App\Http\Controllers\SupplierController;
 
@@ -70,7 +72,9 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::resource('/admin/removes', RemoveController::class);
     Route::get('/admin/remove{id}', [RemoveController::class, 'show'])->name('remove.show');
     //Orders
-    Route::get('/admin/orders', [AdminController::class, 'Orders'])->name('admin.orders');
+    Route::resource('/admin/orders', OrderController::class);
+    Route::get('/admin/reorder', [AdminController::class, 'Reorder'])->name('reorder.index');
+    Route::get('/admin/notine_reorder', [AdminController::class, 'Reordermins'])->name('noticereorder.index');
     //Manage Suppliers
     Route::resource('/admin/suppliers', SupplierController::class);
 

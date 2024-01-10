@@ -5,14 +5,14 @@
         <a href="{{ route('cremoves.index')}}" class="btn btn-danger btn-icon-text">
           <i class="bi bi-trash-fill btn-icon-prepend"></i>Remove Stocks
         </a>
-        <div class="input-group col-6 search-form" style="margin-bottom: 20px; float:right">
+        {{-- <div class="input-group col-6 search-form" style="margin-bottom: 20px; float:right">
             <div class="input-group-prepend">
               <span class="input-group-text" id="search" style="background-color:  #3794fc; color: #fff">
                 <i class="icon-search"></i>
               </span>
             </div>
             <input type="text" class="form-control" placeholder="Search Product SKU..." wire:model.lazy="searchCexpiry">
-        </div>
+        </div> --}}
         <div class="table-responsive">
           <table class="table table-hover">
             <thead style="color: #000; font-weight: bolder">
@@ -27,26 +27,26 @@
             </thead>
             <tbody>
               @forelse ($expiries as $expiry)
-                <tr>
-                  <td>{{ $expiry->smrn }}</td>
-                  <td>{{ $expiry->psku }}</td>
-                  <td>{{ $expiry->pname }}</td>
-                  <td>{{ $expiry->expiry_date }}</td>
-                  <td>
-                    @if ($expiry->issuequan == NULL)
-                      {{ $expiry->quantity }}
-                    @else
-                      {{ $expiry->issuequan }}
-                    @endif 
-                  </td>
-                  <td> 
-                    @if ($expiry->revstock == 1)
-                      <a class="btn btn-primary btn-fw disabled" id="icon_edit" href="{{ route('creceives.edit', $expiry->id) }}"><i class="icon-open"></i></a>
-                    @else
+                @if ($expiry->revstock == 1)
+
+                @else
+                  <tr>
+                    <td>{{ $expiry->smrn }}</td>
+                    <td>{{ $expiry->psku }}</td>
+                    <td>{{ $expiry->pname }}</td>
+                    <td>{{ $expiry->expiry_date }}</td>
+                    <td>
+                      @if ($expiry->issuequan == NULL)
+                        {{ $expiry->quantity }}
+                      @else
+                        {{ $expiry->issuequan }}
+                      @endif 
+                    </td>
+                    <td> 
                       <a class="btn btn-primary btn-fw" id="icon_edit" href="{{ route('creceives.edit', $expiry->id) }}"><i class="icon-open"></i></a>
-                    @endif
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                @endif
               @empty
                   <tr>
                       <td colspan="6" style="text-align: center; font-size: 24px">

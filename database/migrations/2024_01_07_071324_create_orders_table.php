@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('tron');
+            $table->string('tron')->nullable()->unique();
             $table->date('ordate');
             $table->string('orsupname');
             $table->string('orsupnumber');
@@ -23,10 +23,10 @@ return new class extends Migration
             $table->string('orpdept');
             $table->string('orpmins');
             $table->string('orpcurs');
-            $table->string('orquan');
-            $table->string('orpcost');
-            $table->string('ortcost');
-            $table->string('orstatus');
+            $table->string('orquan')->nullable();
+            $table->string('orpcost')->nullable();
+            $table->string('ortcost')->nullable();
+            $table->string('orstatus')->nullable();
             $table->timestamps();
         });
     }

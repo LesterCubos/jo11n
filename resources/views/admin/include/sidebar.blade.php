@@ -35,7 +35,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('admin.orders') }}">
+      <a class="nav-link" href="{{ route('orders.index') }}">
         <i class="bi bi-cart-check menu-icon"></i>
         <span class="menu-title">Order</span>
       </a>

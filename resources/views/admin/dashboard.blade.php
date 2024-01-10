@@ -36,6 +36,26 @@
        </div>
     @endif
 
+    @if ($countexp > 0)
+      <div class="alert alert-danger fade in alert-dismissible show" role="alert" style="margin-top: 20px;">
+        <i class="bi bi-exclamation-circle-fill"></i>
+        <strong> {{ $countexp }}</strong> {{ __('Product(s) is about to expire/expired this week') }}
+        <a class="btn btn-danger btn-icon-text" style="margin-left: 10px" href="{{ route('expiry.index') }}">
+          Inspect
+        </a> 
+      </div>
+    @endif
+
+    @if ($countreorder > 0)
+      <div class="alert alert-danger fade in alert-dismissible show" role="alert" style="margin-top: 20px;">
+        <i class="bi bi-exclamation-circle-fill"></i>
+        <strong> {{ $countreorder }}</strong> {{ __('Product(s) has reached the minimun stock level') }}
+        <a class="btn btn-danger btn-icon-text" style="margin-left: 10px" href="{{ route('noticereorder.index') }}">
+          Inspect
+        </a> 
+      </div>
+    @endif
+
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card" style="margin-top: 30px; border-radius: 10px; background-color: #2e9cca">
         <div class="card-body">
