@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('availability')->nullable();
             $table->string('availability_stock')->nullable();
             $table->string('dept')->nullable();
+            $table->boolean('reorstock')->default(0);
             $table->timestamps();
         });
     }

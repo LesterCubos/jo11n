@@ -27,26 +27,22 @@
             </thead>
             <tbody>
               @forelse ($expiries as $expiry)
-                @if ($expiry->revstock == 1)
-
-                @else
-                  <tr>
-                    <td>{{ $expiry->smrn }}</td>
-                    <td>{{ $expiry->psku }}</td>
-                    <td>{{ $expiry->pname }}</td>
-                    <td>{{ $expiry->expiry_date }}</td>
-                    <td>
-                      @if ($expiry->issuequan == NULL)
-                        {{ $expiry->quantity }}
-                      @else
-                        {{ $expiry->issuequan }}
-                      @endif 
-                    </td>
-                    <td> 
-                      <a class="btn btn-primary btn-fw" id="icon_edit" href="{{ route('receives.edit', $expiry->id) }}"><i class="icon-open"></i></a>
-                    </td>
-                  </tr>
-                @endif
+                <tr>
+                  <td>{{ $expiry->smrn }}</td>
+                  <td>{{ $expiry->psku }}</td>
+                  <td>{{ $expiry->pname }}</td>
+                  <td>{{ $expiry->expiry_date }}</td>
+                  <td>
+                    @if ($expiry->issuequan == NULL)
+                      {{ $expiry->quantity }}
+                    @else
+                      {{ $expiry->issuequan }}
+                    @endif 
+                  </td>
+                  <td> 
+                    <a class="btn btn-primary btn-fw" id="icon_edit" href="{{ route('receives.edit', $expiry->id) }}"><i class="icon-open"></i></a>
+                  </td>
+                </tr>
               @empty
                   <tr>
                       <td colspan="6" style="text-align: center; font-size: 24px">

@@ -228,9 +228,25 @@
         </div>
         <div class="col-md-6">
             <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Receive Quantity</label>
+                <div class="col-sm-9">
+                    @if(empty($smrnDetails))
+                        <input type="number" class="form-control" value="{{ old('quantity') }}" readonly>
+                    @else
+                        <input type="number" class="form-control" value="{{ $smrnDetails->quantity }}" readonly>
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
                 <label class="col-sm-3 col-form-label">Quantity</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{ old('quantity') }}">
+                    @if(empty($smrnDetails))
+                        <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{ old('quantity') }}" readonly>
+                    @else
+                    <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" value="{{ old('quantity') }}"  min="1" max="{{ $smrnDetails->quantity }}">
+                    @endif
                     @error('quantity')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

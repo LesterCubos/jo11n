@@ -18,6 +18,7 @@ use App\Models\ReceiveIssue;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\RecentActivity;
+use App\Models\ReceiveIssueLog;
 use Illuminate\Support\Facades\Auth;
 
 class ReceiveController extends Controller
@@ -72,6 +73,10 @@ class ReceiveController extends Controller
         $create->movement = 'RECEIVED';
         $create->save();
 
+        $rilog = ReceiveIssueLog::create($validated);
+        $rilog->movement = 'RECEIVED';
+        $rilog->save();
+
         $stocks = Stock::all();
         if ($stocks->isEmpty()) {
             $product = Product::where('product_sku', $request->input('psku'))->first();
@@ -110,6 +115,7 @@ class ReceiveController extends Controller
                     if ($stock->stock_quantity > 0) {
                         if ($stock->stock_quantity <= $product->min_stock) {
                             $avail = 'Low Stock';
+                            $stock->reorstock = 0;
                         } else {
                             $avail = 'In Stock';
                         }
@@ -168,7 +174,7 @@ class ReceiveController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ReceiveIssue $id): View
+    public function show(ReceiveIssueLog $id): View
     {
         $user = Auth::user();
         $role = $user->role;

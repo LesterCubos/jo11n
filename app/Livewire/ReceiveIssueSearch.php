@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\ReceiveIssue;
+use App\Models\ReceiveIssueLog;
 
 class ReceiveIssueSearch extends Component
 {
@@ -20,7 +20,7 @@ class ReceiveIssueSearch extends Component
     public function render()
     {
         return view('livewire.receive-issue-search', [
-            'receiveissues' => ReceiveIssue::where('psku','like', "%{$this->searchRecieveIssue}%")->orderBy('updated_at','desc')->paginate(10),
+            'receiveissues' => ReceiveIssueLog::where('psku','like', "%{$this->searchRecieveIssue}%")->orderBy('updated_at','desc')->paginate(10),
         ]);
     }
 }

@@ -41,7 +41,7 @@
     Go Back
   </a>
 
-  @livewire('expiry-search')
+  @livewire('reorders-search')
 
 </div>
 

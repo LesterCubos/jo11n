@@ -9,26 +9,16 @@ use App\Models\RecentActivity;
 use App\Models\Stock;
 use App\Models\Product;
 use App\Models\ReceiveIssue;
+use App\Models\Orders;
 
 class AdminController extends Controller
 {
     public function AdminDashboard()
     {
         $activities = RecentActivity::latest()->take(5)->get();
-        $products = Product::all();
-        $stocks = Stock::all();
-        $countreorder = 0;
-        foreach ($products as $product) {
-            foreach ($stocks as $stock) {
-                if ($product->product_sku == $stock->stock_sku) {
-                    if ($stock->stock_quantity <= $product->min_stock) {
-                        $countreorder++;
-                    }
-                }
-            }
-        }
+        $countreorder = Stock::where('availability', 'Low Stock')->where('reorstock', 0)->count();
         $countexp = 0;
-        $expiries = ReceiveIssue::whereNotNull('expiry_date')->get();
+        $expiries = ReceiveIssue::whereNotNull('expiry_date')->where('revstock', 0)->get();
         foreach ($expiries as $expiry) {
             if($expiry->expiry_date ) {
                 $today = Carbon::now();

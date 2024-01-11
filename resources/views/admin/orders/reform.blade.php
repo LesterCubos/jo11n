@@ -47,20 +47,16 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Supplier Name</label>
                                     <div class="col-sm-9">
-                                      @if(empty($skuDetails))
-                                        <input type="text" class="form-control  @error('orsupname') is-invalid @enderror" id="orsupname" name="orsupname" value="" required readonly>
-                                      @else
                                         @foreach ($categories as $category)
-                                            @if ($category->product_category == $skuDetails->product_category)
+                                            @if ($category->product_category == $reorder->product_category)
                                                 @php( $orsupname = $category->supplier_name )
                                             @endif
                                         @endforeach
                                           <input type="text" class="form-control  @error('orsupname') is-invalid @enderror" id="orsupname" name="orsupname" value="{{ $orsupname }}" required readonly>
-                                      @endif
                                       @error('orsupname')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -73,16 +69,12 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Contact Info</label>
                                     <div class="col-sm-9">
-                                        @if(empty($skuDetails))
-                                            <input type="number" class="form-control @error('orsupnumber') is-invalid @enderror" id="orsupnumber" name="orsupnumber" value="{{ old('orsupnumber') }}" readonly>
-                                        @else
-                                            @foreach ($suppliers as $supplier)
-                                                @if ($orsupname == $supplier->supplier_name)
-                                                    @php( $orsupnumber = $supplier->supplier_number )
-                                                @endif
-                                            @endforeach
-                                            <input type="number" class="form-control @error('orsupnumber') is-invalid @enderror" id="orsupnumber" name="orsupnumber" value="{{ $orsupnumber }}" readonly>
-                                          @endif
+                                        @foreach ($suppliers as $supplier)
+                                            @if ($orsupname == $supplier->supplier_name)
+                                                @php( $orsupnumber = $supplier->supplier_number )
+                                            @endif
+                                        @endforeach
+                                        <input type="number" class="form-control @error('orsupnumber') is-invalid @enderror" id="orsupnumber" name="orsupnumber" value="{{ $orsupnumber }}" readonly>
                                         @error('orsupnumber')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -121,11 +113,7 @@
                               <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Product Name</label>
                                 <div class="col-sm-9">
-                                    @if(empty($skuDetails))
-                                        <input type="text" class="form-control  @error('orpname') is-invalid @enderror" id="orpname" name="orpname" value="" required readonly>
-                                    @else
-                                        <input type="text" class="form-control  @error('orpname') is-invalid @enderror" id="orpname" name="orpname" value="{{ $skuDetails->product_name }}" required readonly>
-                                    @endif
+                                    <input type="text" class="form-control  @error('orpname') is-invalid @enderror" id="orpname" name="orpname" value="{{ $reorder->product_name }}" required readonly>
                                     @error('orpname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -138,11 +126,7 @@
                                 <div class="form-group row">
                                   <label class="col-sm-3 col-form-label">Product Category</label>
                                   <div class="col-sm-9">
-                                      @if(empty($skuDetails))
-                                        <input type="text" class="form-control  @error('orpcat') is-invalid @enderror" id="orpcat" name="orpcat" value="" required readonly>
-                                      @else
-                                        <input type="text" class="form-control  @error('orpcat') is-invalid @enderror" id="orpcat" name="orpcat" value="{{ $skuDetails->product_category }}" required readonly>
-                                      @endif
+                                      <input type="text" class="form-control  @error('orpcat') is-invalid @enderror" id="orpcat" name="orpcat" value="{{ $reorder->product_category }}" required readonly>
                                       @error('orpcat')
                                       <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -155,16 +139,12 @@
                                 <div class="form-group row">
                                   <label class="col-sm-3 col-form-label">Department</label>
                                   <div class="col-sm-9">
-                                      @if(empty($skuDetails))
-                                        <input type="text" class="form-control  @error('orpdept') is-invalid @enderror" id="orpdept" name="orpdept" value="" required readonly>
-                                      @else
-                                        @foreach ($categories as $category)
-                                            @if ($category->product_category == $skuDetails->product_category)
-                                                @php( $department = $category->department )
-                                            @endif
-                                        @endforeach
-                                          <input type="text" class="form-control  @error('orpdept') is-invalid @enderror" id="orpdept" name="orpdept" value="{{ $department }}" required readonly>
-                                      @endif
+                                      @foreach ($categories as $category)
+                                        @if ($category->product_category == $reorder->product_category)
+                                            @php( $department = $category->department )
+                                        @endif
+                                      @endforeach
+                                      <input type="text" class="form-control  @error('orpdept') is-invalid @enderror" id="orpdept" name="orpdept" value="{{ $department }}" required readonly>
                                       @error('orpdept')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -177,11 +157,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Minimum Stock</label>
                                     <div class="col-sm-9">
-                                        @if(empty($skuDetails))
-                                            <input type="number" class="form-control @error('orpmins') is-invalid @enderror" id="orpmins" name="orpmins" value="{{ old('orpmins') }}" readonly>
-                                        @else
-                                            <input type="number" class="form-control @error('orpmins') is-invalid @enderror" id="orpmins" name="orpmins" value="{{ $skuDetails->min_stock }}" readonly>
-                                        @endif
+                                        <input type="number" class="form-control @error('orpmins') is-invalid @enderror" id="orpmins" name="orpmins" value="{{ $reorder->min_stock }}" readonly>
                                         @error('orpmins')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -194,11 +170,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Current Stock</label>
                                     <div class="col-sm-9">
-                                        @if(empty($skuDetails))
-                                            <input type="number" class="form-control @error('orpcurs') is-invalid @enderror" id="orpcurs" name="orpcurs" value="{{ old('orpcurs') }}" readonly>
-                                        @else
-                                            <input type="number" class="form-control @error('orpcurs') is-invalid @enderror" id="orpcurs" name="orpcurs" value="{{ $stock->stock_quantity }}" readonly>
-                                        @endif
+                                        <input type="number" class="form-control @error('orpcurs') is-invalid @enderror" id="orpcurs" name="orpcurs" value="{{ $stock->stock_quantity }}" readonly>
                                         @error('orpcurs')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -219,7 +191,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                       </div>
                     </div>

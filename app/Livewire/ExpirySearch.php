@@ -21,8 +21,9 @@ class ExpirySearch extends Component
     public function render()
     {
         return view('livewire.expiry-search', [
-            'expiries' => ReceiveIssue::where('psku','like', "%{$this->searchExpiry}%")->orderBy('updated_at','desc')
+            'expiries' => ReceiveIssue::where('psku','like', "%{$this->searchExpiry}%")->orderBy('updated_at','asc')
             ->whereNotNull('expiry_date')
+            ->where('revstock', 0)
             ->paginate(10), 'removes' => RemmoveStock::all()
         ]);
     }

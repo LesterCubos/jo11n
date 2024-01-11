@@ -6,9 +6,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Orders;
 
-class OrderSearch extends Component
+class ReordersSearch extends Component
 {
-    public $searchOrder='';
+    public $searchReor='';
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
@@ -19,9 +19,9 @@ class OrderSearch extends Component
     }
     public function render()
     {
-        return view('livewire.order-search', [
-            'orders' => Orders::where('orsku','like', "%{$this->searchOrder}%")->orderBy('updated_at','desc')
-            ->where('ortype', 'ORDER')
+        return view('livewire.reorders-search', [
+            'reorders' => Orders::where('orsku','like', "%{$this->searchReor}%")->orderBy('updated_at','desc')
+            ->where('ortype', 'REORDER')
             ->paginate(10),
         ]);
     }

@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('orpcost')->nullable();
             $table->string('ortcost')->nullable();
             $table->string('orstatus')->nullable();
+            $table->string('ortype')->nullable();
+            $table->boolean('reor')->default(0);
             $table->timestamps();
         });
     }

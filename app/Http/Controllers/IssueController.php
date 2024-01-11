@@ -18,6 +18,7 @@ use App\Models\ReceiveIssue;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\RecentActivity;
+use App\Models\ReceiveIssueLog;
 
 class IssueController extends Controller
 {
@@ -73,6 +74,7 @@ class IssueController extends Controller
                     if ($stock->stock_quantity > 0) {
                         if ($stock->stock_quantity <= $product->min_stock) {
                             $avail = 'Low Stock';
+                            $stock->reorstock = 0;
                         } else {
                             $avail = 'In Stock';
                         }
@@ -102,6 +104,10 @@ class IssueController extends Controller
         $create = ReceiveIssue::create($validated);
         $create->movement = 'ISSUED';
         $create->save();
+
+        $rilog = ReceiveIssueLog::create($validated);
+        $rilog->movement = 'ISSUED';
+        $rilog->save();
 
         $act = new RecentActivity();
         $act->actname =  $request->input('pname');

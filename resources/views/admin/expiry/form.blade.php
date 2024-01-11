@@ -173,7 +173,7 @@
                 
                 
                 <div class="flex text-center" style="padding-top: 10px">
-                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                    <button type="submit" class="btn btn-danger mr-2">Remove</button>
                     <a href="{{ route('expiry.index')}}" class="btn btn-warning">Cancel</a>
                 </div>
               </form>
