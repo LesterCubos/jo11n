@@ -20,7 +20,10 @@ class ReceiveIssueSearch extends Component
     public function render()
     {
         return view('livewire.receive-issue-search', [
-            'receiveissues' => ReceiveIssueLog::where('psku','like', "%{$this->searchRecieveIssue}%")->orderBy('updated_at','desc')->paginate(10),
+            'receiveissues' => ReceiveIssueLog::where('psku','like', "%{$this->searchRecieveIssue}%")
+            ->orWhere('pname','like', "%{$this->searchRecieveIssue}%")
+            ->orWhere('smrn','like', "%{$this->searchRecieveIssue}%")
+            ->orderBy('updated_at','desc')->paginate(10),
         ]);
     }
 }

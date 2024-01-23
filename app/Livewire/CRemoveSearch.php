@@ -23,7 +23,10 @@ class CRemoveSearch extends Component
         $user = Auth::user();
         $userdept = $user->department;
         return view('livewire.c-remove-search', [
-            'removes' => RemmoveStock::where('rsku','like', "%{$this->searchCremove}%")->orderBy('updated_at','desc')
+            'removes' => RemmoveStock::where('rsku','like', "%{$this->searchCremove}%")
+            ->orWhere('rsmrn','like', "%{$this->searchCremove}%")
+            ->orWhere('rname','like', "%{$this->searchCremove}%")
+            ->orderBy('updated_at','desc')
             ->where('rdept', $userdept)
             ->paginate(10),
         ]);

@@ -14,7 +14,7 @@
                   <i class="icon-search"></i>
                 </span>
               </div>
-              <input type="text" class="form-control" placeholder="Search Product Category..." wire:model.lazy="searchCategory">
+              <input type="text" class="form-control" placeholder="Search Product Categories..." wire:model.lazy="searchCategory">
             </div>
         </div>
           <div class="table-responsive mt-3">

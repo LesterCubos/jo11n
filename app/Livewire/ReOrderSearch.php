@@ -21,7 +21,9 @@ class ReOrderSearch extends Component
     public function render()
     {
         return view('livewire.re-order-search', [
-            'reorders' => Stock::where('stock_sku','like', "%{$this->searchReOrder}%")->orderBy('updated_at','asc')
+            'reorders' => Stock::where('stock_sku','like', "%{$this->searchReOrder}%")
+            ->orWhere('product_name','like', "%{$this->searchReOrder}%")
+            ->orderBy('updated_at','asc')
             ->where('availability', 'Low Stock')
             ->where('reorstock', 0)
             ->paginate(10),

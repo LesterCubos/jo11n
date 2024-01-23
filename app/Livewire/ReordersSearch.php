@@ -20,7 +20,10 @@ class ReordersSearch extends Component
     public function render()
     {
         return view('livewire.reorders-search', [
-            'reorders' => Orders::where('orsku','like', "%{$this->searchReor}%")->orderBy('updated_at','desc')
+            'reorders' => Orders::where('orsku','like', "%{$this->searchReor}%")
+            ->orWhere('orpname','like', "%{$this->searchReor}%")
+            ->orWhere('tron','like', "%{$this->searchReor}%")
+            ->orderBy('updated_at','desc')
             ->where('ortype', 'REORDER')
             ->paginate(10),
         ]);

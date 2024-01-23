@@ -21,7 +21,10 @@ class ProductSearch extends Component
     public function render()
     {
         return view('livewire.product-search', [
-            'products' => Product::where('product_name','like', "%{$this->searchProduct}%")->orderBy('updated_at','desc')->paginate(10),
+            'products' => Product::where('product_name','like', "%{$this->searchProduct}%")
+            ->orWhere('product_sku','like', "%{$this->searchProduct}%")
+            ->orWhere('product_category','like', "%{$this->searchProduct}%")
+            ->orderBy('updated_at','desc')->paginate(10),
             'categories' => Category::orderBy('updated_at', 'desc')->paginate(5)
         ]);
     }

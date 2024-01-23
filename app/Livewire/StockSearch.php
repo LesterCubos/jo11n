@@ -20,7 +20,10 @@ class StockSearch extends Component
     public function render()
     {
         return view('livewire.stock-search', [
-            'stocks' => stock::where('product_name','like', "%{$this->searchStock}%")->orderBy('updated_at','desc')->paginate(10),
+            'stocks' => stock::where('product_name','like', "%{$this->searchStock}%")
+            ->orWhere('stock_sku','like', "%{$this->searchStock}%")
+            ->orWhere('stock_category','like', "%{$this->searchStock}%")
+            ->orderBy('updated_at','desc')->paginate(10),
         ]);
     }
 }

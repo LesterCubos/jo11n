@@ -20,7 +20,10 @@ class RemoveSearch extends Component
     public function render()
     {
         return view('livewire.remove-search', [
-            'removes' => RemmoveStock::where('rsku','like', "%{$this->searchRemove}%")->orderBy('updated_at','desc')->paginate(10),
+            'removes' => RemmoveStock::where('rsku','like', "%{$this->searchRemove}%")
+            ->orWhere('rsmrn','like', "%{$this->searchRemove}%")
+            ->orWhere('rname','like', "%{$this->searchRemove}%")
+            ->orderBy('updated_at','desc')->paginate(10),
         ]);
     }
 }

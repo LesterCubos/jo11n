@@ -20,7 +20,9 @@ class CategorySearch extends Component
     public function render()
     {
         return view('livewire.category-search', [
-            'categories' => Category::where('product_category','like', "%{$this->searchCategory}%")->orderBy('updated_at','desc')->paginate(10),
+            'categories' => Category::where('product_category','like', "%{$this->searchCategory}%")
+            ->orWhere('department','like', "%{$this->searchCategory}%")
+            ->orderBy('updated_at','desc')->paginate(10),
         ]);
     }
 }

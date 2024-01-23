@@ -20,7 +20,10 @@ class UserSearch extends Component
     public function render()
     {
         return view('livewire.user-search', [
-            'users' => User::where('name','like', "%{$this->searchUser}%")->orderBy('updated_at','desc')->paginate(10),
+            'users' => User::where('name','like', "%{$this->searchUser}%")
+            ->orWhere('department','like', "%{$this->searchUser}%")
+            ->orWhere('role','like', "%{$this->searchUser}%")
+            ->orderBy('updated_at','desc')->paginate(10),
         ]);
     }
 }

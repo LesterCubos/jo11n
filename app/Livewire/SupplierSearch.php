@@ -20,7 +20,9 @@ class SupplierSearch extends Component
     public function render()
     {
         return view('livewire.Supplier-search', [
-            'suppliers' => Supplier::where('Supplier_name','like', "%{$this->searchSupplier}%")->orderBy('updated_at','desc')->paginate(10),
+            'suppliers' => Supplier::where('supplier_name','like', "%{$this->searchSupplier}%")
+            ->orWhere('supplier_kpn','like', "%{$this->searchSupplier}%")
+            ->orderBy('updated_at','desc')->paginate(10),
         ]);
     }
 }

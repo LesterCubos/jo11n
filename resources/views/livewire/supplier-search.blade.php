@@ -11,7 +11,7 @@
                 <i class="icon-search"></i>
               </span>
             </div>
-            <input type="text" class="form-control" placeholder="Search Supplier Name..." wire:model.lazy="searchSupplier">
+            <input type="text" class="form-control" placeholder="Search Suppliers..." wire:model.lazy="searchSupplier">
         </div>
         <div class="table-responsive">
           <table class="table table-hover">
@@ -86,7 +86,7 @@
                 @empty
                 <tr>
                     <td colspan="8" style="text-align: center; font-size: 24px">
-                        <div class="py-5" style="">No supplier Found...</div>
+                        <div class="py-5" style="">No Supplier Found...</div>
                     </td>  
                 </tr>
               @endforelse

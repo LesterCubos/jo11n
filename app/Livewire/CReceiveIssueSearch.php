@@ -23,7 +23,10 @@ class CReceiveIssueSearch extends Component
         $user = Auth::user();
         $userdept = $user->department;
         return view('livewire.c-receive-issue-search', [
-            'receiveissues' => ReceiveIssueLog::where('psku','like', "%{$this->searchCRecieveIssue}%")->orderBy('updated_at','desc')
+            'receiveissues' => ReceiveIssueLog::where('psku','like', "%{$this->searchCRecieveIssue}%")
+            ->orWhere('pname','like', "%{$this->searchCRecieveIssue}%")
+            ->orWhere('smrn','like', "%{$this->searchCRecieveIssue}%")
+            ->orderBy('updated_at','desc')
             ->where('department', $userdept)
             ->paginate(10),
         ]);

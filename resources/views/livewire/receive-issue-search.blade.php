@@ -11,7 +11,7 @@
                 <i class="icon-search"></i>
               </span>
             </div>
-            <input type="text" class="form-control" placeholder="Search Product SKU..." wire:model.lazy="searchRecieveIssue">
+            <input type="text" class="form-control" placeholder="Search Received/Issued Stocks..." wire:model.lazy="searchRecieveIssue">
         </div>
         <div class="table-responsive">
           <table class="table table-hover">
