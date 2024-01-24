@@ -22,12 +22,22 @@
        </div>
     @endif
 
+    @if ($countexp > 0)
+      <div class="alert alert-danger fade in alert-dismissible show" role="alert" style="margin-top: 20px;">
+        <i class="bi bi-exclamation-circle-fill"></i>
+        <strong> {{ $countexp }}</strong> {{ __('Product(s) is about to expire/expired this week') }}
+        <a class="btn btn-danger btn-icon-text" style="margin-left: 10px" href="{{ route('expiry.index') }}">
+          Inspect
+        </a> 
+      </div>
+    @endif
+
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card" style="margin-top: 30px; border-radius: 10px; background-color: #2e9cca">
         <div class="card-body">
           <div class="d-flex justify-content-between mb-3">
             <h4 class="card-title" style="font-size: 20px">Overview</h4>
-            <div class="dropdown">
+            {{-- <div class="dropdown">
                 <button class="btn btn-sm dropdown-toggle text-dark pt-0 pr-0" type="button" id="dropdownMenuSizeButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 18px">
                   <i class="ri-filter-2-fill" style="font-size: 16px"></i> Today
                 </button>
@@ -36,6 +46,48 @@
                   <h6 class="dropdown-header">This week</h6>
                   <h6 class="dropdown-header">This month</h6>
                 </div>
+            </div> --}}
+          </div>
+          <div class="row">
+            <div class="row flex-grow">
+                <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
+                    <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
+                      <div class="card-body">
+                          <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">TOTAL PRODUCTS</h4>
+                          <p>Total Number of Products</p>
+                          <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-cart-alt" style="font-size: 20px"></i> {{ $tcountp }}</h4>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
+                    <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
+                      <div class="card-body">
+                          <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">STOCK IN</h4>
+                          <p>Total Stock In</p>
+                          <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-upvote" style="font-size: 20px"></i> {{ $tcountsi }}</h4>
+                      </div>
+                    </div>
+               </div>
+    
+               <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
+                <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
+                  <div class="card-body">
+                      <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">STOCK OUT</h4>
+                      <p>Total Stock Out</p>
+                      <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-downvote" style="font-size: 20px"></i> {{ $tcountso }}</h4>
+                  </div>
+                </div>
+               </div>
+    
+               <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
+                <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
+                  <div class="card-body">
+                      <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">CURRENT STOCK</h4>
+                      <p>Total Available Stocks</p>
+                      <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-box" style="font-size: 20px"></i> {{ $tcounts }}</h4>
+                  </div>
+                </div>
+               </div>
             </div>
           </div>
           <div class="row">
@@ -43,18 +95,18 @@
                 <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
                     <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
                       <div class="card-body">
-                          <h4 class="card-title">TOTAL PRODUCTS</h4>
-                          <p>23% increase in conversion</p>
-                          <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-cart-alt" style="font-size: 20px"></i> 43,981</h4>
+                          <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">STOCK VALUE</h4>
+                          <p>Total Stock value</p>
+                          <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-dollar-circle" style="font-size: 20px"></i> {{ $tcountsv }}</h4>
                       </div>
                     </div>
                 </div>
                 <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
                     <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
                       <div class="card-body">
-                          <h4 class="card-title">STOCK IN</h4>
-                          <p>6% decrease in earnings</p>
-                          <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-upvote" style="font-size: 20px"></i> 55</h4>
+                          <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">STOCK COST</h4>
+                          <p>Total Stock Cost</p>
+                          <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-dollar-circle" style="font-size: 20px"></i> {{ $tcountsc }}</h4>
                       </div>
                     </div>
                </div>
@@ -62,9 +114,9 @@
                <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
                 <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
                   <div class="card-body">
-                      <h4 class="card-title">STOCK OUT</h4>
-                      <p>23% increase in conversion</p>
-                      <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-downvote" style="font-size: 20px"></i> 43</h4>
+                      <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">RE-ORDER</h4>
+                      <p>ReOrder Stocks</p>
+                      <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-archive-in" style="font-size: 20PX"></i> {{ $countreorder }}</h4>
                   </div>
                 </div>
                </div>
@@ -72,51 +124,10 @@
                <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
                 <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
                   <div class="card-body">
-                      <h4 class="card-title">CURRENT STOCK</h4>
-                      <p>23% increase in conversion</p>
-                      <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-box" style="font-size: 20px"></i> 439</h4>
-                  </div>
-                </div>
-               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="row flex-grow">
-                <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
-                    <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
-                      <div class="card-body">
-                          <h4 class="card-title">STOCK VALUE</h4>
-                          <p>20% increase in conversion</p>
-                          <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-dollar-circle" style="font-size: 20px"></i> 43,981</h4>
-                      </div>
-                    </div>
-                </div>
-                <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
-                    <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
-                      <div class="card-body">
-                          <h4 class="card-title">EXPIRED STOCKS</h4>
-                          <p>8% decrease in earnings</p>
-                          <h4 class="text-dark font-weight-bold mb-2"><i class="bi bi-clock-fill" style="font-size: 20px"></i> 3</h4>
-                      </div>
-                    </div>
-               </div>
-    
-               <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
-                <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
-                  <div class="card-body">
-                      <h4 class="card-title">RE-ORDER</h4>
-                      <p>13% increase in conversion</p>
-                      <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-archive-in" style="font-size: 20PX"></i> 481</h4>
-                  </div>
-                </div>
-               </div>
-    
-               <div class="col-xxl-4 col-md-3 grid-margin stretch-card">
-                <div class="card" style="border-radius: 15px; background-color: #f9f6f2">
-                  <div class="card-body">
-                      <h4 class="card-title">OUT OF STOCK</h4>
-                      <p>25% increase in conversion</p>
-                      <h4 class="text-dark font-weight-bold mb-2"><i class="bx bxs-archive-out" style="font-size: 20px"></i> 981</h4>
+                      <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">STOCK SUMMARY</h4>
+                      <p><code class="text-dark" style="font-size: 16px; font-weight: bold">In Stock</code> - {{$tcountis}}</p>
+                      <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Low Stock</code> - {{$tcountls}}</p>
+                      <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Out of Stock</code> - {{$tcountos}}</p>
                   </div>
                 </div>
                </div>
@@ -137,67 +148,29 @@
     <br>
     <div class="row d-flex">
         <div class="col-xl-8 d-flex grid-margin stretch-card">
-            <div class="card">
+            <div class="card" style="border-radius: 10px">
               <div class="card-body">
-                  <h4 class="card-title">Website Audience Metrics</h4>
-                  <div class="row">
-                    <div class="col-lg-5">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit amet cumque cupiditate</p>
+                <h4 class="card-title" style="font-size: 16px; letter-spacing: 1px; color: #d67229">BASIC INFORMATION</h4>
+                <div class="row">
+                    <div class="col-sm-12">
+                      <p style="margin-bottom: 20px">Remember, it's important to keep your information up-to-date for accurate records and communication. If you notice any incorrect information on your profile, please initiate a request for change.</p>
+                      <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Name: </code>{{ $user->name }}</p>
+                      <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Email: </code> {{ $user->email }}</p>
+                      <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Contact Number: </code> {{ $user->contact_number }}</p>
                     </div>
-                    <div class="col-lg-7">
-                      <div class="chart-legends d-lg-block d-none" id="chart-legends"></div>
-                    </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-sm-12">
-                          <canvas id="web-audience-metrics-satacked" class="mt-3"></canvas>
-                      </div>
-                  </div>
-
                 </div>
+            </div>
               </div>
         </div>
 
         <div class="col-xl-4 grid-margin stretch-card">
           <div class="card" style="border-radius: 10px">
             <div class="card-body">
-              <h4 class="card-title mb-3">Recent Activity</h4>
+              <h4 class="card-title mb-3" style="font-size: 16px; letter-spacing: 1px; color: #d67229">Request Summary</h4>
               <div class="row">
                 <div class="col-sm-12">
-                  <div class="text-dark">
-                    <div class="d-flex pb-3 border-bottom justify-content-between">
-                      <div class="mr-3"><i class="ri-inbox-archive-line icon-md" style="color:#f8b500"></i></div>
-                      <div class="font-weight-bold mr-sm-4">
-                        <div>Stock In</div>
-                        <div class="text-muted font-weight-normal mt-1">32 Minutes Ago</div>
-                      </div>
-                      <div><h6 class="font-weight-bold text-info ml-sm-2">$325</h6></div>
-                    </div>
-                    <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
-                      <div class="mr-3"><i class="ri-shopping-cart-2-line icon-md" style="color: #37b246"></i></div>
-                      <div class="font-weight-bold mr-sm-4">
-                        <div>Add New Item</div>
-                        <div class="text-muted font-weight-normal mt-1">45 Minutes Ago</div>
-                      </div>
-                      <div><h6 class="font-weight-bold text-info ml-sm-2">$4987</h6></div>
-                    </div>
-                    <div class="d-flex pb-3 pt-3 border-bottom justify-content-between">
-                      <div class="mr-3"><i class="ri-inbox-unarchive-line icon-md" style="color: #4d4dff"></i></div>
-                      <div class="font-weight-bold mr-sm-4">
-                        <div>Deposit has updated to Paid                              </div>
-                        <div class="text-muted font-weight-normal mt-1">1 Days Ago</div>
-                      </div>
-                      <div><h6 class="font-weight-bold text-info ml-sm-2">$5391</h6></div>
-                    </div>
-                    <div class="d-flex pt-3 justify-content-between">
-                      <div class="mr-3"><i class="ri-shopping-cart-2-line icon-md" style="color: #37b246"></i></div>
-                      <div class="font-weight-bold mr-sm-4">
-                        <div>Add New Item</div>
-                        <div class="text-muted font-weight-normal mt-1">3 weeks Ago</div>
-                      </div>
-                      <div><h6 class="font-weight-bold text-info ml-sm-2">$264</h6></div>
-                    </div>
-                  </div>
+                  <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Pending Request</code> - {{$trp}}</p>
+                  <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Low Stock</code> - {{$trc}}</p>
                 </div>
               </div>
             </div>

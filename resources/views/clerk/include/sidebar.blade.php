@@ -35,7 +35,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{ route('crequests.index') }}">
         <i class="bx bxs-message-add menu-icon"></i>
         <span class="menu-title">Request</span>
       </a>

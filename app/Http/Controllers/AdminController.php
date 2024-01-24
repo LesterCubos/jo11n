@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\Models\RecentActivity;
 use App\Models\Stock;
 use App\Models\Product;
@@ -15,8 +16,9 @@ class AdminController extends Controller
 {
     public function AdminDashboard()
     {
+        $user = Auth::user();
         $activities = RecentActivity::latest()->take(5)->get();
-        $countreorder = Stock::where('availability', 'Low Stock')->where('reorstock', 0)->count();
+        $countreorder = Stock::where('availability', 'Low Stock')->orWhere('availability', 'Out of Stock')->where('reorstock', 0)->count();
         $countexp = 0;
         $expiries = ReceiveIssue::whereNotNull('expiry_date')->where('revstock', 0)->get();
         foreach ($expiries as $expiry) {
@@ -33,7 +35,32 @@ class AdminController extends Controller
                 }
             }
         }
-        return view('admin.dashboard', compact('activities', 'countreorder', 'countexp'));
+        $tcountp = Product::all()->count();
+        $risis = ReceiveIssue::where('movement', 'RECEIVED')->get();
+        $tcountsi = 0;
+        foreach($risis as $risi) {
+            $tcountsi = $tcountsi + $risi->quantity;
+        }
+        $risos = ReceiveIssue::where('movement', 'ISSUED')->get();
+        $tcountso = 0;
+        foreach($risos as $riso) {
+            $tcountso = $tcountso + $riso->quantity;
+        }
+        $stocks = Stock::all();
+        $tcounts = 0;
+        $tcountsv = 0;
+        $tcountsc = 0;
+        foreach ($stocks as $stock) {
+            $tcounts = $tcounts + $stock->stock_quantity;
+            $tcountsv = $tcountsv + $stock->total_stock_value;
+            $tcountsc = $tcountsc + $stock->total_stock_cost;
+        }
+        $tcountls = Stock::where('availability', 'Low Stock')->count();
+        $tcountos = Stock::where('availability', 'Out of Stock')->count();
+        $tcountis = Stock::where('availability', 'In Stock')->count();
+        return view('admin.dashboard', compact('activities', 'countreorder', 'countexp', 'user',
+            'tcountp', 'tcountsi', 'tcountso', 'tcounts', 'tcountsv', 'tcountsc', 'tcountls', 'tcountos', 'tcountis'
+    ));
     }
 
     public function Stocks()

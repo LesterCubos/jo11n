@@ -23,11 +23,12 @@ class CproductSearch extends Component
         $user = Auth::user();
         $userdept = $user->department;
         return view('livewire.cproduct-search', [
-            'products' => Product::where('product_name','like', "%{$this->searchCproduct}%")
-            ->orWhere('product_sku','like', "%{$this->searchCproduct}%")
-            ->orWhere('product_category','like', "%{$this->searchCproduct}%")
+            'products' => Product::where(function ($query) {
+                $query->where('product_name','like', "%{$this->searchCproduct}%")
+                ->orWhere('product_sku','like', "%{$this->searchCproduct}%")
+                ->orWhere('product_category','like', "%{$this->searchCproduct}%");
+            })->where('pdept', $userdept)
             ->orderBy('updated_at','desc')
-            ->where('pdept', $userdept)
             ->paginate(10),
         ]);
     }

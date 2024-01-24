@@ -31,11 +31,7 @@
                   <td>{{ $order->orpname }}</td>
                   <td>{{ $order->orstatus }}</td>
                   <td> 
-                    @if ($order->revstock == 1)
-                      <a class="btn btn-primary btn-fw disabled" id="icon_edit" href="{{ route('receives.edit', $order->id) }}"><i class="icon-open"></i></a>
-                    @else
-                      <a class="btn btn-primary btn-fw" id="icon_edit" href="{{ route('receives.edit', $order->id) }}"><i class="icon-open"></i></a>
-                    @endif
+                    <a href="/admin/orders{{$order->id}}" class="btn btn-info"><i class="icon-eye"></i></a> 
                   </td>
                 </tr>
               @empty

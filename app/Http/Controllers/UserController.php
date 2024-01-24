@@ -16,6 +16,7 @@ class UserController extends Controller
     }
 
     public function form(){
-        return view('admin.manage_users.form');
+        $users = User::all();
+        return view('admin.manage_users.form', compact('users'));
     }
 }

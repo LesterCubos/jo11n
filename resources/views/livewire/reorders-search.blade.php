@@ -31,11 +31,7 @@
                   <td>{{ $reorder->orpname }}</td>
                   <td>{{ $reorder->orstatus }}</td>
                   <td> 
-                    @if ($reorder->revstock == 1)
-                      <a class="btn btn-primary btn-fw disabled" id="icon_edit" href="{{ route('receives.edit', $reorder->id) }}"><i class="icon-open"></i></a>
-                    @else
-                      <a class="btn btn-primary btn-fw" id="icon_edit" href="{{ route('receives.edit', $reorder->id) }}"><i class="icon-open"></i></a>
-                    @endif
+                    <a href="/admin/orders{{$reorder->id}}" class="btn btn-info"><i class="icon-eye"></i></a>
                   </td>
                 </tr>
               @empty

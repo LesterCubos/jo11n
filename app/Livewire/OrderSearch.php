@@ -20,11 +20,13 @@ class OrderSearch extends Component
     public function render()
     {
         return view('livewire.order-search', [
-            'orders' => Orders::where('orsku','like', "%{$this->searchOrder}%")
-            ->orWhere('tron','like', "%{$this->searchOrder}%")
-            ->orWhere('orpname','like', "%{$this->searchOrder}%")
+            'orders' => Orders::where(function ($query) {
+                $query->where('orsku','like', "%{$this->searchOrder}%")
+                ->orWhere('tron','like', "%{$this->searchOrder}%")
+                ->orWhere('orpname','like', "%{$this->searchOrder}%");
+            })->where('ortype', 'ORDER')
+            ->orWhere('ortype', 'REQUEST ORDER')
             ->orderBy('updated_at','desc')
-            ->where('ortype', 'ORDER')
             ->paginate(10),
         ]);
     }

@@ -34,7 +34,7 @@
         <form class="form-sample text-center">
             <a class="btn btn-info btn-icon-text" href="{{ route('reorder.index') }}" style="margin-left: 20px; margin-right: 100px"><i class="bi bi-box-seam btn-icon-prepend" style="font-size: 18px"></i>Re-Order</a>
             <a class="btn btn-warning btn-icon-text" href="{{ route('orders.create') }}" style="margin-left: 20px; margin-right: 100px"><i class="bi bi-plus-circle-fill btn-icon-prepend" style="font-size: 18px"></i>New Order</a>
-            <a class="btn btn-success btn-icon-text" href="{{ route('products.index') }}" style="margin-left: 20px; margin-right: 100px"><i class="bi bi-clipboard-check btn-icon-prepend" style="font-size: 18px"></i>Request</a>
+            <a class="btn btn-success btn-icon-text" href="{{ route('requests.index') }}" style="margin-left: 20px; margin-right: 100px"><i class="bi bi-clipboard-check btn-icon-prepend" style="font-size: 18px"></i>Request</a>
         </form>
       </div>
     </div>

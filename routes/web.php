@@ -17,6 +17,8 @@ use App\Http\Controllers\RemoveController;
 use App\Http\Controllers\CSVHandlerController;
 // Order
 use App\Http\Controllers\OrderController;
+// Request
+use App\Http\Controllers\RequestController;
 // Manage Supplier
 use App\Http\Controllers\SupplierController;
 
@@ -75,6 +77,10 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::resource('/admin/orders', OrderController::class);
     Route::get('/admin/reorder', [AdminController::class, 'Reorder'])->name('reorder.index');
     Route::get('/admin/notine_reorder', [AdminController::class, 'Reordermins'])->name('noticereorder.index');
+    Route::get('/admin/orders{id}', [OrderController::class, 'show'])->name('order.show');
+    // Request
+    Route::resource('/admin/requests', RequestController::class);
+    Route::get('/admin/request{id}', [RequestController::class, 'show'])->name('request.show');
     //Manage Suppliers
     Route::resource('/admin/suppliers', SupplierController::class);
 
@@ -98,6 +104,8 @@ Route::middleware(['auth','role:clerk'])->group(function(){
     Route::get('/clerk/expiry', [ClerkController::class, 'Expiry'])->name('clerk.expiry.index');
     Route::resource('/clerk/cremoves', RemoveController::class);
     Route::get('/clerk/remove{id}', [RemoveController::class, 'show'])->name('clerk.remove.show');
+    Route::resource('/clerk/crequests', RequestController::class);
+    Route::get('/clerk/request{id}', [RequestController::class, 'show'])->name('crequest.show');
 
 }); //End Group Clerk Middleware
 

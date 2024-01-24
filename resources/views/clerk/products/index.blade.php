@@ -10,7 +10,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('clerk.dashboard') }}" class="abreadlink">
             <i class="bi bi-house-fill"></i> Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.stocks') }}">Stock Management</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('clerk.stocks') }}">Stock Management</a></li>
         <li class="breadcrumb-item active" style="font-weight: 700">List of Products</li>
     </ol>
     </nav>

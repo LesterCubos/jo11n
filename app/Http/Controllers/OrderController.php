@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
+use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 // We will use Form Request to validate incoming requests from our store and update method
@@ -19,6 +19,7 @@ use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Stock;
 use App\Models\RecentActivity;
+use App\Models\Request;
 
 class OrderController extends Controller
 {
@@ -61,6 +62,8 @@ class OrderController extends Controller
                 $stock->reorstock = 1;
                 $stock->save();
             }
+        } elseif ($orroute == 'reqorder') {
+            $create->ortype = 'REQUEST ORDER';
         } else {
             $create->ortype = 'ORDER';
         }
@@ -71,6 +74,8 @@ class OrderController extends Controller
         $act->details = $request->input('orstatus');
         if ($orroute == 'reorder') {
             $act->activity = 'REORDER';
+        } elseif ($orroute == 'reqorder') {
+            $act->activity = 'REQUEST ORDER';
         } else {
             $act->activity = 'ORDER';
         }
@@ -82,6 +87,15 @@ class OrderController extends Controller
             $orroute = Session::get('orroute');
             if ($orroute == 'reorder') {
                 $route = 'noticereorder.index';
+            } elseif ($orroute == 'reqorder') {
+                $reqNo = Session::get('reqNo');
+                $requests = Request::where('reqNo', $reqNo)->get();
+                foreach ($requests as $request) {
+                    $request->status = 'Completed';
+                    $request->save();
+                }
+                session()->flash('notif.success', 'Request Order Stock created successfully!');
+                $route = 'requests.index';
             } else {
                 $route = 'orders.index';
             }
@@ -96,10 +110,11 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Orders $id): View
     {
-        //
+        return view('admin.orders.show', ['order' => $id]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

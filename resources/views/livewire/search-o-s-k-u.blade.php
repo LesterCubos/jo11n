@@ -216,7 +216,11 @@
                     @if(empty($skuDetails))
                         <input type="number" class="form-control @error('orpcurs') is-invalid @enderror" id="orpcurs" name="orpcurs" value="{{ old('orpcurs') }}" readonly>
                     @else
-                        <input type="number" class="form-control @error('orpcurs') is-invalid @enderror" id="orpcurs" name="orpcurs" value="{{ $stock->stock_quantity }}" readonly>
+                        @if(empty($stock->stock_quantity))
+                            <input type="number" class="form-control @error('orpcurs') is-invalid @enderror" id="orpcurs" name="orpcurs" value="0" readonly>
+                        @else
+                            <input type="number" class="form-control @error('orpcurs') is-invalid @enderror" id="orpcurs" name="orpcurs" value="{{ $stock->stock_quantity }}" readonly>
+                        @endif
                     @endif
                     @error('orpcurs')
                     <span class="invalid-feedback" role="alert">
