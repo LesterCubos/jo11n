@@ -272,6 +272,22 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Issue Type</label>
+                <div class="col-sm-9">
+                    <select id="issuetype" name="issuetype" class="form-control @error('issuetype') is-invalid @enderror" value="{{ old('issuetype') }}" required>
+                        <option value="Dispose" {{ old('issuetype') == 'Dispose' ? 'selected' : '' }}>Dispose</option>
+                        <option value="Release" {{ old('issuetype') == 'Release' ? 'selected' : '' }}>Release</option>
+                    </select>
+                    @error('issuetype')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="form-group">
               <label class="col-sm-3 col-form-label">Notes</label>

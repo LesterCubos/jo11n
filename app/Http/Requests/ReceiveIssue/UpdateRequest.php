@@ -33,6 +33,7 @@ class UpdateRequest extends FormRequest
             'sname' => 'required|string|min:3|max:250',
             'quantity' => 'required|string|min:1|max:250',
             'notes' => 'nullable|string|min:3|max:6000',
+            'issuetype' => 'required|string|min:1|max:250',
         ];
     }
 }

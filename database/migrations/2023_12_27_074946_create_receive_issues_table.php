@@ -30,6 +30,7 @@ return new class extends Migration
             $table->boolean('revstock')->default(0);
             $table->string('issuesmrn')->nullable();
             $table->string('issuequan')->nullable();
+            $table->string('issuetype')->nullable();
             $table->timestamps();
         });
     }
