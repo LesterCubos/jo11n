@@ -47,7 +47,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" style="text-align: center; font-size: 24px">
+                    <td colspan="7" style="text-align: center; font-size: 24px">
                         <div class="py-5" style="">No Receives and Issues Stock Found...</div>
                     </td>  
                 </tr>

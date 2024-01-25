@@ -19,6 +19,7 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Models\RecentActivity;
 use App\Models\ReceiveIssueLog;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class ReceiveController extends Controller
@@ -109,9 +110,11 @@ class ReceiveController extends Controller
     
                     $stock->stock_quantity = $stock->stock_quantity + $request->input('quantity');
                     $stock->purchase_cost = $request->input('purchase_cost');
-                    $stock->total_stock_cost = number_format($request->input('purchase_cost') * $stock->stock_quantity, 2, '.', '');
+                    $temptsc = number_format($request->input('purchase_cost') * $request->input('quantity'), 2, '.', '');
+                    $stock->total_stock_cost = $stock->total_stock_cost + $temptsc;
                     $stock->selling_cost = $request->input('selling_cost');
-                    $stock->total_stock_value = number_format($request->input('selling_cost') * $stock->stock_quantity, 2, '.', '');
+                    $temptsv = number_format($request->input('selling_cost') * $request->input('quantity'), 2, '.', '');
+                    $stock->total_stock_value = $stock->total_stock_value + $temptsv;
                     if ($stock->stock_quantity > 0) {
                         if ($stock->stock_quantity <= $product->min_stock) {
                             $avail = 'Low Stock';
@@ -163,6 +166,19 @@ class ReceiveController extends Controller
         $act->save();
         
         if($create) {
+            $ctrans = Transaction::create([
+                'transaction_type' =>  'RECEIVED',
+                'transaction_date' => $request->input('date'),
+                'product_sku' =>  $request->input('psku'),
+                'product_name' => $request->input('pname'),
+                'product_category' => $request->input('pcategory'),
+                'department' => $request->input('department'),
+                'transaction_quantity' => $request->input('quantity'),
+                'total_stock_cost' =>  number_format( $request->input('purchase_cost') * $request->input('quantity'), 2, '.', ''),
+                'transaction_notes' => $request->input('notes'),
+            ]);
+            $ctrans->generateTransNo();
+            $ctrans->save();
             // add flash for the success notification
             session()->flash('notif.success', 'Receive Stocks created successfully!');
             return redirect()->route('receives.index');

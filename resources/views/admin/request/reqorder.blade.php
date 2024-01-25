@@ -176,7 +176,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Quantity</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control @error('orstatus') is-invalid @enderror" id="orstatus" name="orstatus" value="{{ old('orstatus') }}" required>
+                                        <input type="number" class="form-control @error('orstatus') is-invalid @enderror" id="orstatus" name="orstatus" value="{{ $req->requested_quantity }}" required>
                                         @error('orstatus')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

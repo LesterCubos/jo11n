@@ -170,7 +170,7 @@
               <div class="row">
                 <div class="col-sm-12">
                   <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Pending Request</code> - {{$trp}}</p>
-                  <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Low Stock</code> - {{$trc}}</p>
+                  <p><code class="text-dark" style="font-size: 16px; font-weight: bold">Completed</code> - {{$trc}}</p>
                 </div>
               </div>
             </div>

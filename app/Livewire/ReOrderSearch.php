@@ -25,6 +25,7 @@ class ReOrderSearch extends Component
                 $query->where('stock_sku','like', "%{$this->searchReOrder}%")
                 ->orWhere('product_name','like', "%{$this->searchReOrder}%");
             })->where('availability', 'Low Stock')
+            ->orWhere('availability', 'Out of Stock')
             ->where('reorstock', 0)
             ->orderBy('updated_at','asc')
             ->paginate(10),

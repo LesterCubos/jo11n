@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_id');
+            $table->string('transNo')->unique()->default(0);
             $table->string('transaction_type');
             $table->date('transaction_date');
             $table->string('product_sku');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('department');
             $table->string('transaction_quantity');
             $table->string('total_stock_cost');
-            $table->text('transaction_notes');
+            $table->text('transaction_notes')->nullable();
             $table->timestamps();
         });
     }

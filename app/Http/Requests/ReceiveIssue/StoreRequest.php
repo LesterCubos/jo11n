@@ -35,6 +35,7 @@ class StoreRequest extends FormRequest
             'selling_cost' => 'required|string|min:1|max:10',
             'expiry_date' => 'nullable|date|after:today',
             'notes' => 'nullable|string|min:3|max:6000',
+            'issuetype' => 'nullable|string|min:1|max:250',
         ];
     }
 }

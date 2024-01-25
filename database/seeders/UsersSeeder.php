@@ -22,6 +22,7 @@ class UsersSeeder extends Seeder
             'contact_number' => '09876543211', 
             'password' => Hash::make('admin123.'),
             'role' => 'admin', 
+            'department' => 'Inventory Manager',
            ],
         ]);
     }

@@ -68,6 +68,7 @@ class RequestController extends Controller
      */
     public function show(Request $id): View
     {
+        Session::put('reqNo', $id->reqNo);
         $user = Auth::user();
         $role = $user->role;
         if ($role == 'clerk') {

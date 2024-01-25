@@ -19,6 +19,7 @@ use App\Models\Product;
 use App\Models\Stock;
 use App\Models\RecentActivity;
 use App\Models\ReceiveIssueLog;
+use App\Models\Transaction;
 
 class IssueController extends Controller
 {
@@ -69,8 +70,14 @@ class IssueController extends Controller
                     $stock = Stock::where('stock_sku', $request->input('psku'))->first();
                     $product = Product::where('product_sku', $request->input('psku'))->first();
                     $stock->stock_quantity = $stock->stock_quantity - $request->input('quantity');
-                    $stock->total_stock_cost = number_format($stock->purchase_cost * $stock->stock_quantity, 2, '.', '');
-                    $stock->total_stock_value = number_format($stock->selling_cost * $stock->stock_quantity, 2, '.', '');
+                    // $stock->total_stock_cost = number_format($stock->purchase_cost * $stock->stock_quantity, 2, '.', '');
+                    // $stock->total_stock_value = number_format($stock->selling_cost * $stock->stock_quantity, 2, '.', '');
+
+                    $temptsc = number_format($request->input('purchase_cost') * $request->input('quantity'), 2, '.', '');
+                    $stock->total_stock_cost = $stock->total_stock_cost - $temptsc;
+                    $temptsv = number_format($request->input('selling_cost') * $request->input('quantity'), 2, '.', '');
+                    $stock->total_stock_value = $stock->total_stock_value - $temptsv;
+
                     if ($stock->stock_quantity > 0) {
                         if ($stock->stock_quantity <= $product->min_stock) {
                             $avail = 'Low Stock';
@@ -116,6 +123,35 @@ class IssueController extends Controller
         $act->save();
         
         if($create) {
+            if ($request->input('issuetype') == 'Release') {    
+                $ctrans = Transaction::create([
+                    'transaction_type' =>  'RELEASED',
+                    'transaction_date' => $request->input('date'),
+                    'product_sku' =>  $request->input('psku'),
+                    'product_name' => $request->input('pname'),
+                    'product_category' => $request->input('pcategory'),
+                    'department' => $request->input('department'),
+                    'transaction_quantity' => $request->input('quantity'),
+                    'total_stock_cost' =>  number_format( $request->input('purchase_cost') * $request->input('quantity'), 2, '.', ''),
+                    'transaction_notes' => $request->input('notes'),
+                ]);
+                $ctrans->generateTransNo();
+                $ctrans->save();
+            } else {
+                $ctrans = Transaction::create([
+                    'transaction_type' =>  'DISPOSED',
+                    'transaction_date' => $request->input('date'),
+                    'product_sku' =>  $request->input('psku'),
+                    'product_name' => $request->input('pname'),
+                    'product_category' => $request->input('pcategory'),
+                    'department' => $request->input('department'),
+                    'transaction_quantity' => $request->input('quantity'),
+                    'total_stock_cost' =>  number_format( $request->input('purchase_cost') * $request->input('quantity'), 2, '.', ''),
+                    'transaction_notes' => $request->input('notes'),
+                ]);
+                $ctrans->generateTransNo();
+                $ctrans->save();
+            }
             // add flash for the success notification
             session()->flash('notif.success', $notif);
             return redirect()->route('receives.index');

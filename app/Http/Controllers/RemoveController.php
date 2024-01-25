@@ -16,6 +16,7 @@ use App\Models\Stock;
 use App\Models\RecentActivity;
 use App\Models\Product;
 use App\Models\ReceiveIssue;
+use App\Models\Transaction;
 
 
 class RemoveController extends Controller
@@ -61,8 +62,13 @@ class RemoveController extends Controller
                     $stock = Stock::where('stock_sku', $request->input('rsku'))->first();
                     $product = Product::where('product_sku', $request->input('rsku'))->first();
                     $stock->stock_quantity = $stock->stock_quantity - $request->input('rquantity');
-                    $stock->total_stock_cost = number_format($stock->purchase_cost * $stock->stock_quantity, 2, '.', '');
-                    $stock->total_stock_value = number_format($stock->selling_cost * $stock->stock_quantity, 2, '.', '');
+                    // $stock->total_stock_cost = number_format($stock->purchase_cost * $stock->stock_quantity, 2, '.', '');
+                    // $stock->total_stock_value = number_format($stock->selling_cost * $stock->stock_quantity, 2, '.', '');
+                    $temptsc = number_format($stock->purchase_cost * $request->input('rquantity'), 2, '.', '');
+                    $stock->total_stock_cost = $stock->total_stock_cost - $temptsc;
+                    $temptsv = number_format($stock->selling_cost * $request->input('rquantity'), 2, '.', '');
+                    $stock->total_stock_value = $stock->total_stock_value - $temptsv;
+
                     if ($stock->stock_quantity > 0) {
                         if ($stock->stock_quantity <= $product->min_stock) {
                             $avail = 'Low Stock';
@@ -101,6 +107,20 @@ class RemoveController extends Controller
         $act->save();
 
         if($create) {
+            $stock = Stock::where('stock_sku', $request->input('rsku'))->first();
+            $ctrans = Transaction::create([
+                'transaction_type' =>  'REMOVED',
+                'transaction_date' => $request->input('curdate'),
+                'product_sku' =>  $request->input('rsku'),
+                'product_name' => $request->input('rname'),
+                'product_category' => $request->input('rcat'),
+                'department' => $request->input('rdept'),
+                'transaction_quantity' => $request->input('rquantity'),
+                'total_stock_cost' =>  number_format( $stock->purchase_cost * $request->input('rquantity'), 2, '.', ''),
+                'transaction_notes' => $request->input('rnotes'),
+            ]);
+            $ctrans->generateTransNo();
+            $ctrans->save();
             // add flash for the success notification
             session()->flash('notif.success', $notif);
             return redirect()->route('expiry.index');

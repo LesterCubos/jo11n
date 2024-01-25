@@ -19,6 +19,8 @@ use App\Http\Controllers\CSVHandlerController;
 use App\Http\Controllers\OrderController;
 // Request
 use App\Http\Controllers\RequestController;
+// Transaction
+use App\Http\Controllers\TransactionController;
 // Manage Supplier
 use App\Http\Controllers\SupplierController;
 
@@ -81,6 +83,9 @@ Route::middleware(['auth','role:admin'])->group(function(){
     // Request
     Route::resource('/admin/requests', RequestController::class);
     Route::get('/admin/request{id}', [RequestController::class, 'show'])->name('request.show');
+    // Transaction
+    Route::resource('/admin/transactions', TransactionController::class);
+    Route::get('/admin/transaction{id}', [TransactionController::class, 'show'])->name('transaction.show');
     //Manage Suppliers
     Route::resource('/admin/suppliers', SupplierController::class);
 

@@ -277,6 +277,7 @@
                 <label class="col-sm-3 col-form-label">Issue Type</label>
                 <div class="col-sm-9">
                     <select id="issuetype" name="issuetype" class="form-control @error('issuetype') is-invalid @enderror" value="{{ old('issuetype') }}" required>
+                        <option value="" ></option>
                         <option value="Dispose" {{ old('issuetype') == 'Dispose' ? 'selected' : '' }}>Dispose</option>
                         <option value="Release" {{ old('issuetype') == 'Release' ? 'selected' : '' }}>Release</option>
                     </select>
