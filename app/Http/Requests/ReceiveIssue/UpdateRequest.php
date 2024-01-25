@@ -34,6 +34,8 @@ class UpdateRequest extends FormRequest
             'quantity' => 'required|string|min:1|max:250',
             'notes' => 'nullable|string|min:3|max:6000',
             'issuetype' => 'required|string|min:1|max:250',
+            'purchase_cost' => 'required|string|min:1|max:10',
+            'selling_cost' => 'required|string|min:1|max:10',
         ];
     }
 }

@@ -1,12 +1,12 @@
-@extends('admin.layouts.app')
+@extends('clerk.layouts.app')
 @section('title','Transaction Form')
 @section('content')
 
-<div class="content-wrapper" style="background-image: linear-gradient(to right, #b6fbff, #83a4d4);">
+<div class="content-wrapper" style="background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);">
   <div class="pagename">
     <nav>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="abreadlink"><i class="bi bi-house-fill"></i> Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('clerk.dashboard') }}" class="abreadlink"><i class="bi bi-house-fill"></i> Dashboard</a></li>
         <li class="breadcrumb-item">Transaction Management</li>
         <li class="breadcrumb-item active">Transaction Form</li>
     </ol>
@@ -133,7 +133,7 @@
                 
                 
                 <div class="flex text-center" style="padding-top: 10px">
-                    <a href="{{ route('transactions.index') }}" class="btn btn-warning">Back</a>
+                    <a href="{{ route('receipts.index') }}" class="btn btn-warning">Back</a>
                 </div>
               </form>
             </div>

@@ -41,13 +41,13 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{ route('creports.index') }}">
         <i class="bi bi-clipboard-data menu-icon"></i>
         <span class="menu-title">Reports</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{ route('receipts.index') }}">
         <i class="bi bi-receipt-cutoff menu-icon"></i>
         <span class="menu-title">Receipts</span>
       </a>

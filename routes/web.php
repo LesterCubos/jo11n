@@ -19,13 +19,18 @@ use App\Http\Controllers\CSVHandlerController;
 use App\Http\Controllers\OrderController;
 // Request
 use App\Http\Controllers\RequestController;
+//Report
+use App\Http\Controllers\DiffReportController;
 // Transaction
 use App\Http\Controllers\TransactionController;
 // Manage Supplier
 use App\Http\Controllers\SupplierController;
+// BackUp
+use App\Http\Controllers\BackupController; 
 
 // Clerk
 use App\Http\Controllers\ClerkController;
+use App\Http\controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,11 +88,22 @@ Route::middleware(['auth','role:admin'])->group(function(){
     // Request
     Route::resource('/admin/requests', RequestController::class);
     Route::get('/admin/request{id}', [RequestController::class, 'show'])->name('request.show');
+    // Report
+    Route::get('/admin/different_reports', [AdminController::class, 'Report'])->name('diff_report.index');
+    Route::resource('/admin/reports', ReportController::class);
+    Route::get('/admin/reports{id}', [ReportController::class, 'show'])->name('report.show');
+    Route::get('/admin/inventory_summary_report', [DiffReportController::class, 'inventory_summary_report'])->name('insumrep.index');
+    Route::get('/admin/reorder_report', [DiffReportController::class, 'reorder_report'])->name('reorrep.index');
+    Route::get('/admin/order_report', [DiffReportController::class, 'order_report'])->name('orrep.index');
+    Route::get('/admin/issue_report', [DiffReportController::class, 'issue_report'])->name('isrep.index');
     // Transaction
     Route::resource('/admin/transactions', TransactionController::class);
     Route::get('/admin/transaction{id}', [TransactionController::class, 'show'])->name('transaction.show');
     //Manage Suppliers
     Route::resource('/admin/suppliers', SupplierController::class);
+    //BackUp
+    Route::get('/admin/backups', [AdminController::class, 'backups'])->name('backups.index');
+    Route::get('/admin/our_backup_database', [BackupController::class, 'our_backup_database'])->name('our_backup_database');
 
 }); //End Group Admin Middleware
 
@@ -111,6 +127,10 @@ Route::middleware(['auth','role:clerk'])->group(function(){
     Route::get('/clerk/remove{id}', [RemoveController::class, 'show'])->name('clerk.remove.show');
     Route::resource('/clerk/crequests', RequestController::class);
     Route::get('/clerk/request{id}', [RequestController::class, 'show'])->name('crequest.show');
+    Route::resource('/clerk/receipts', TransactionController::class);
+    Route::get('/clerk/receipt{id}', [TransactionController::class, 'show'])->name('receipt.show');
+    Route::resource('/clerk/creports', ReportController::class);
+    Route::get('/clerk/reports{id}', [ReportController::class, 'show'])->name('creport.show');
 
 }); //End Group Clerk Middleware
 

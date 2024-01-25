@@ -47,7 +47,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{ route('diff_report.index') }}">
         <i class="bi bi-clipboard-data menu-icon"></i>
         <span class="menu-title">Reports</span>
       </a>
@@ -65,7 +65,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="">
+      <a class="nav-link" href="{{ route('backups.index') }}">
         <i class="ri-upload-cloud-2-line menu-icon"></i>
         <span class="menu-title">Backup</span>
       </a>

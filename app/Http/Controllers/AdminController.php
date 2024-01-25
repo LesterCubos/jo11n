@@ -86,4 +86,13 @@ class AdminController extends Controller
     {
         return view('admin.orders.sminstock');
     }
+    public function backups()
+    {
+        return view('admin.backup.index');
+    }
+    public function Report()
+    {
+        $stocks = Stock::all();
+        return view('admin.report.index', compact('stocks'));
+    }
 }

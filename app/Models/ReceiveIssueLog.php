@@ -22,5 +22,6 @@ class ReceiveIssueLog extends Model
         'expiry_date',
         'notes',
         'movement',
+        'issuetype',
     ];
 }
